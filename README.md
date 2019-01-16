@@ -61,9 +61,12 @@ Simulate interaction of radiation (from T5.2) with sample structural data stored
 
 ## Deliverables
 5.1 Prototype simulation data formats as openPMD domain specific extensions  including example datasets (M12, R, PU, XFEL.EU, ESS)
+
 5.2 Release of documented simulation APIs (M24, O (Software), PU, XFEL.EU+ILL)
+
 5.3 Repository of documented jupyter notebooks and Oasys canvases showcasing simulation
 tasks executable via JupyterHub or remote desktop. (M42, O (Software), PU, XFEL.EU+ESRF)
+
 5.4 VINYL software tested, documented, and released, including integration into interactive data analysis workflow with feedback loop. (M48, R+Software, PU, All)
 
 ## Milestones
