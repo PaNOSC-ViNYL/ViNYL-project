@@ -90,6 +90,13 @@ tasks executable via JupyterHub or remote desktop. (M42, O (Software), PU, XFEL.
 | Person months per participant: | 40 | 36 | 48 | 36 | 24 | 40|
 | Start month 1 | End month 48|
 
+## Risks
+
+| Risk Description | Probability | WP involved | Proposed risk-mitigation measure |
+|---------    	        |---------------|-------  	|-------  	|
+| Data formats not published or not compatible with simulation data | Medium | 3,5 | Fall back on existing data formats (NeXus, CXIDB) and metadata standards (openPMD)|
+| Developed APIs not compatible with data analysis framework | Medium | 4,5 | Monthly meeting with WP 4 contributors to address compatibility issues |
+| Compute resources needed for testing and demonstrations not available or insufficient | High | 5 | Apply for HPC resources, e.g. PRACE preliminary access|
 
 ## References
 [Fortmann-Grote2017] C. Fortmann-Grote et al. Simulations of ultrafast X-ray laser experiments Proc. SPIE, Advances in X-ray Free-Electron Lasers Instrumentation IV, International Society for Optics and Photonics, 2017, 10237, 102370S (2017). https://dx.doi.org/10.1117/12.2270552
