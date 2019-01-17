@@ -69,6 +69,7 @@ tasks executable via JupyterHub or remote desktop. (M42, O (Software), PU, XFEL.
 
 5.4 VINYL software tested, documented, and released, including integration into interactive data analysis workflow with feedback loop. (M48, R+Software, PU, All)
 
+
 ## Milestones
 
 | No. | Title               | WP| Due | Verification      |
@@ -77,6 +78,17 @@ tasks executable via JupyterHub or remote desktop. (M42, O (Software), PU, XFEL.
 |  			MS5.2 		     	|  			Demonstration of simulation 			services 		        	|  			5 		     	|  			M24 		     	|  			Written report 		     	|
 |  			MS5.3 		     	|  			VINYL software release 		     	|  			5 		     	|  			M42 		     	|  			Software released via open 			source repository 		        	|
 |  			MS5.4 		     	|  			Validation of simulation 			services  			 		           	|  			4,5 		     	|  			M48 		     	|  			Written report 		     	|
+
+
+## Resources
+
+| Work package number 5 Lead beneficiary XFEL.EU  |  |  |  |  |  |  |
+|---------    	        |---------------|-------  	|-------   	|--------	|  -----------|  -------------|
+| Work package title VIrtual Neutron and x-raY Laboratory (VINYL) |
+| Participant number             | 1 | 2 | 3 | 4 | 5 | 6|
+| Short name of participant      | ESRF | ILL | XFEL.EU | ESS | ELI | CERIC-ERIC|
+| Person months per participant: | 40 | 36 | 48 | 36 | 24 | 40|
+| Start month 1 | End month 48|
 
 
 ## References
