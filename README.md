@@ -1,5 +1,5 @@
 # ViNYL-project
-This repository keeps track of tasks, milestones, deliverables of workpackage 5 in panosc.
+This repository keeps track of tasks, milestones, deliverables of workpackage 5 in panosc [https://github.com/panosc-eu/panosc-eu.github.io].
 
 ## Schema of ViNYL and relation to other panosc workpackages
 ![](https://github.com/PaNOSC-ViNYL/ViNYL-project/blob/master/Workflow_CFGedits.png)
