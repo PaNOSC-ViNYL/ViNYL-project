@@ -1,0 +1,83 @@
+\documentclass[10pt]{scrartcl}
+\input{panosc_header}
+\ihead{M5.1} % left head
+
+% sophisticated linking of references in the pdf and setting some options
+\usepackage{url}                                                  % for correct typesettings of URLs
+\usepackage{hyperref}                                             % for sophisticated linking of urls, dois, pictures, tables, etc.
+\hypersetup{
+    unicode=true,                                                 % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,                                              % show Acrobat’s toolbar?
+    pdfmenubar=true,                                              % show Acrobat’s menu?
+    pdffitwindow=false,                                           % window fit to page when opened
+    pdfstartview={FitH},                                          % fits the width of the page to the window
+    pdfauthor={C. Fortmann-Grote},                                           % author
+    pdftitle={M5.1: Simulation software in PaNData Software Catalogue},   % title
+    pdfsubject={PaNOSC WP5 (ViNYL) Milestone M5.1},                             % subject of the document
+    pdfcreator={pdflatex},                                         % creator of the document
+    pdfkeywords={PaNOSC, ViNYL, simulations, jupyter, simex, oasys, McStas,
+    service},                                         % list of keywords
+    pdfnewwindow=true,                                            % links in new PDF window
+    colorlinks=true,                                              % false: boxed links; true: colored links
+    linkcolor=blue,                                                % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,                                                % color of links to bibliography
+    filecolor=blue,                                               % color of file links
+    urlcolor=blue                                                 % color of external links
+}
+
+\begin{document}
+\makeatletter
+\begin{titlepage}
+\thispagestyle{scrheadings}
+\begin{center}
+  $~$\\
+  \vspace{2cm}
+  \Huge{%
+    \textbf{%
+      Photon and Neutron Open Science Cloud (PaNOSC) \\[1cm]
+      WP 5 -- ViNYL\\[1cm]
+      M5.1: Simulation software in PaNData Software Catalogue
+    }
+  }\\
+  \vspace{2cm}
+  \large{%
+    Carsten Fortmann-Grote,
+    Mads Bertelsen,
+    Thomas Holm Rod,
+    Manuel Sanchez-Rio,
+    Tom Schoonjans
+  }\\
+  \today
+\end{center}
+\vfill%
+%\includegraphics[width=\textwidth]{figures/PartnerLogos_2017}
+\end{titlepage}
+\makeatother
+
+%\tableofcontents
+
+\section{Summary}
+
+This document lists the simulation frameworks which are foreseen to be integrated in
+the Virtual Neutron and X--Ray Laboratory ``ViNYL'' (Work package 5 of PaNOSC).
+All simulation codes are available through the PaNDATA Software Catalogue
+\url{https://software.pan-data.eu}.
+
+Each framework by itself already integrates various simulation codes. These
+``backengines'' are not listed here. Documentation pages, source code (where
+available), and example datasets can be found via the pan-data software
+catalogue entries of the listed frameworks.\\[5ex]
+\begin{tabular}{|c|l|l|l|}
+  \hline
+  \textbf{Code} & \textbf{Catalogue entry URL} & \textbf{PaNOSC partner} \\
+  \hline
+  simex & \url{https://software.pan-data.eu/software/173/simex-platform} & Eu.XFEL \\
+  oasys & \url{https://software.pan-data.eu/software/78/oasys} & ESRF \\
+  McStass & \url{https://software.pan-data.eu/software/93/mcstas} & ESS \\
+  McXTrace & \url{https://software.pan-data.eu/software/94/mcxtrace} & ESS (DTU) \\
+  \hline
+\end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
+
