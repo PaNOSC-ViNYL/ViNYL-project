@@ -10,8 +10,8 @@
   headheight=25mm,
   headsep=3mm,
   bottom=30mm,
-  left=25mm,
-  right=25mm
+  left=0.7in,
+  right=0.7in
 ]{geometry}
 
 \usepackage[verbose]{placeins}
@@ -26,23 +26,28 @@
 \usepackage{scrpage2}
 \pagestyle{scrheadings} % you have to set the custom layout
 % Head
-%\chead{}
-\ohead{\includegraphics[height=25mm]{figures/PaNOSClogo_web_RGB_512x512.jpg}}
+\chead{}
+\ihead{\includegraphics[width=0.5in]{figures/PaNOSClogo_web_RGB_512x512.jpg}}
+\ohead{}%
 % Foot
-\ifoot{\includegraphics[height=13.4mm]{figures/EU.png}} % left foot
+\ofoot{} % left foot
 \cfoot{%
-  \begin{minipage}{100mm}%
-    \begin{scriptsize}%
-      \normalfont{This project has received funding from the}
-      \textit{European Union’s Horizon 2020 research and innovation programme}
-      \normalfont{under grant agreement No 823852.}
-    \end{scriptsize}%
-  \end{minipage}%
-} % center foot
-\ofoot{\thepage} % right foot
-
+  \normalfont{%
+    \begin{tiny}%
+      \begin{centering}
+        This project has received funding from the
+        European Union’s Horizon 2020 research and innovation programme
+        under grant agreement No 823852.
+        \begin{minipage}[c]{0.3in}
+          \includegraphics[width=\textwidth]{figures/EU.png}
+        \end{minipage}
+      \end{centering}%
+    \end{tiny}%
+  }%
+}%
+%
 \usepackage{booktabs}
-
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   BIBLIOGRAPHY SETTINGS
 \usepackage[bibstyle=nature,sorting=none,maxnames=1000,eprint=false,
