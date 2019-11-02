@@ -272,7 +272,35 @@ An example mock data set is published on Zenodo along with the code used to gene
 \subsubsection{Photons}
 \marginpar{TODO: Aljosa }
 \subsection{Molecular Dynamics data}
-\marginpar{TODO: Juncheng }
+Molecular dynamics (MD) is a long--established computer simulation method to analyze atom/molecular movements by solving Newton's
+equations of motion assuming a given potential energy function. It is broadly used in statistical physics, physical chemistry,
+structural biology, material science, and crystallography. As many researches in above disciplines are largely dependent
+on advanced light sources like synchrotron and free--electron lasers, MD simulation becomes an important tool to predict the 
+results of the experiments conducted in these large light source facilities.
+
+With MD simulation, the structural evolution of the experimental sample can be modeled. Depending on the computing power, the time scale 
+of the model can range from fs to ns, and the length scale can be up to several hundreds nms. The fact that the scales are 
+just right close the the experimental scales and the atomic-level simulation solution make it possible to calculate 
+scattering signals from the MD atomic configuration which is comparable with the experimental sample. This kind of simulations has already
+been used in the researches of deformation under high pressure\cite{kimminau2008jpcm,tang2017jap,tang2018jsr,zhang2019jsr}, 
+crystallization \cite{e2015}, and crystallography \cite{coleman2013msmse} to predict diffraction patterns for experimental design
+and interpretation.
+
+Not only the event that people want to explore in experiment, but also the interaction between sample and incident X--ray can be considered
+in MD simulations. Radiation damage induced by high--intensity X-ray is assumed to be one of the limiting factors
+for achieving subnanometer X-ray imaging of single particles\cite{caleman2011acsn}. With MD simulation codes considering ionization
+process like GROMACS\cite{lindahl2001} and XMDYN\cite{jurek2016}, the effects of radiation damage on the reconstruction resolution
+of single particle imaging can be investigated.
+
+The necessary output of MD simulation is the coordinate of each atom for each atom species in the sample structure. Besides that, the velocity of each atom, 
+the simulation box and the force fields implemented should be recorded if a restart of previous simulation is asked for.
+
+This domain extension can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/upcoming-2.0.0/EXT_MD.md}.
+An example dataset is published on zenodo at \url{https://dx.doi.org/10.5281/zenodo.3525951}
+\cite{Juncheng:zenodo2019}.
+
+Example python code to convert the output of XMDYN to comply the MD domain extension can be found here
+\url{https://github.com/ejcjason/MDDomainExtension/blob/master/xmdyn_to_opmd.py}.
 \fancypagestyle{plain}{}
 \printbibliography
 \end{document}
