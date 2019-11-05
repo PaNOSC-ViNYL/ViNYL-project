@@ -248,7 +248,14 @@ Example python code how to write and read can be found in the python simulation 
 
 \subsection{Raytracing data}
 \subsubsection{Neutrons}
-\marginpar{TODO: Mads }
+The field of neutron scattering relies heavily on Monte Carlo raytracing simulations for design of instrumentation. The low brilliance of neutron sources means that larger beams are required to achieve the necessary intensity, and thus the point approximations used in most analytical calculations are inadequate. Raytracing simulations provides a phase-space description of the neutron beam at the sample position, but it is also possible to do virtual experiments that include the sample physics resulting in expected intensity on the detector.
+
+In Monte Carlo raytracing simulations a large number of random initial neutron states are generated from realistic random distributions or loaded from a file. The neutron state includes position, velocity, polarization, weight and time. The physical unit of the weight is neutrons/s, as the expected intensity of the source is split into the total weight of simulated rays. These rays are propagated through an instrument, and the neutron weights are lowered to account for  absorption or reflectivity losses. The weights can also be manipulated to provide variance reduction, for example by focusing all scattering towards the detector and reducing the weight with the appropriate factor based on the solid angle of the detector. The intensity expected in a pixel of a detector is then the sum of the weights of neutrons that arrived in that pixel.
+
+The openPMD extension for neutron raytracing simulations contains the necessary fields for describing neutron state, facilitating transfer of neutron rays between different simulation tools. The different simulation packages include different capabilities, and thus it can be useful to switch from one package to another to get the highest accuracy possible.
+
+The proposed domain extension for neutron scattering can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/domex_neutron_raytracing/EXT_NRAYTRACING.md}. An example mock data set is published on Zenodo along with the code used to generate the dataset \cite{Bertelsen:zenodo2019}.
+
 \subsubsection{Photons}
 \marginpar{TODO: Aljosa }
 \subsection{Molecular Dynamics data}
