@@ -270,7 +270,12 @@ The proposed domain extension for neutron scattering can be found at \url{https:
 An example mock data set is published on Zenodo along with the code used to generate the dataset \cite{Bertelsen:zenodo2019}.
 
 \subsubsection{Photons}
-\marginpar{TODO: Aljosa }
+Raytracing is extensively used in the design and performance assessment of X-ray beamlines. It allows for simulation of different properties of the beam, such as the spot size, divergence and generally propagate rays through the beamline. To do this, a number of rays $N$ are first initialized according to spatial and energy distributions, corresponding to the source (bending magnet, undulator, etc.) properties. Each ray is then propagated from one to the next optical element (plane mirror, elliptical mirror, etc.) and the position and divergence of the beam are stored for each position. This way, a full description of the beam can be had at any point downstream and allows for easy modifications to the beamline, making use of the previously calculated unchanged parts.
+
+One of such codes is called ShadowOui and is a part of the OASYS framework \cite{Rebuffi2016}. In the PaNOSC project, other potentially interoperable codes (e.g. Simex) where identified and a common data format, allowing for linking the output of one code and the input to another, has been proposed and devised. The openPMD extension for X-ray/photon raytracing contains all the necessary information for that. Additionally to the position and the direction, it includes the following information: the energy of the rays, phases for P- and S- polarized photons and the P- and S- polarized components.
+
+The extension can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/latest/EXT_PRAYTRACE.md} and its example data file and the code used to generate it has been published on Zenodo \cite{Hafner:zenodo2019}.
+
 \subsection{Molecular Dynamics data}
 Molecular dynamics (MD) is a long--established computer simulation method to analyze atom/molecular movements by solving Newton's
 equations of motion assuming a given potential energy function. It is broadly used in statistical physics, physical chemistry,
