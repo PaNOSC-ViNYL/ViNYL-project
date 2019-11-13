@@ -1,0 +1,317 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage[style=nature]{biblatex}
+\addbibresource{references.bib}
+% Set date format
+\usepackage[ddmmyyyy]{datetime}
+% Set fonts
+%\setmainfont{Muli}[
+    %Path = fonts/ ,
+    %Extension = .ttf ,
+    %UprightFont = *-Regular ,
+    %ItalicFont = *-Italic ,
+    %BoldFont = *-Bold ,
+    %BoldItalicFont = *-BoldItalic
+%]
+%\setsansfont{Muli-Black}[
+    %Path = fonts/ ,
+    %Extension = .ttf ,
+    %ItalicFont = *Italic
+%]
+% Set page margin
+\usepackage{geometry}
+\geometry{a4paper,
+            % total={175mm,257mm}, %space for content
+            headheight=80pt,
+            headsep=2pt,
+            % top=3cm,
+            bottom=2cm,
+            left=2cm,
+            right=1.75cm}
+% Set the name of the table of contents
+\usepackage{url}                                                  % for correct typesettings of URLs
+\usepackage{hyperref}                                             % for sophisticated linking of urls, dois, pictures, tables, etc.
+\hypersetup{
+    unicode=true,                                                 % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,                                              % show Acrobat’s toolbar?
+    pdfmenubar=true,                                              % show Acrobat’s menu?
+    pdffitwindow=false,                                           % window fit to page when opened
+    pdfstartview={FitH},                                          % fits the width of the page to the window
+    pdfauthor={C. Fortmann-Grote, Juncheng E, Aljosa Hafner, Mads Bertelsen},                                           % author
+    pdftitle={D5.1: Prototype simulation data formats as openPMD domain specific extensions including example datasets},   % title
+    pdfsubject={PaNOSC WP5 (ViNYL) Deliverable D5.1},                             % subject of the document
+    pdfcreator={pdflatex},                                         % creator of the document
+    pdfnewwindow=true,                                            % links in new PDF window
+    colorlinks=true,                                              % false: boxed links; true: colored links
+    linkcolor=blue,                                                % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,                                                % color of links to bibliography
+    filecolor=blue,                                               % color of file links
+    urlcolor=blue                                                 % color of external links
+}
+
+
+\renewcommand{\contentsname}{Table of Contents}
+
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyfoot{} % clear all footer fields
+\renewcommand{\headrulewidth}{0pt} % clear the header ruler line
+\cfoot{\includegraphics[width=\textwidth]{footer.pdf}}
+
+\begin{document}
+% \thispagestyle{empty}
+{
+	\centering
+    \begin{onehalfspace}
+    \sffamily
+	{\LARGE PaNOSC \par}
+	{\LARGE Photon and Neutron Open Science Cloud \par}
+	{\LARGE H2020-INFRAEOSC-04-2018 \par}
+	{\LARGE Grant Agreement Number: 823852 \par}
+	\end{onehalfspace}
+
+	\vfill
+	\includegraphics[width=\textwidth]{PaNOSClogo_web_RGB.pdf}\par
+	\vfill
+
+	{\large \textbf{Deliverable: 5.1 Prototype simulation data formats as openPMD domain specific extensions including example datasets}}
+} % end of centering
+\newpage
+
+\chead{\includegraphics[width=\textwidth]{header.pdf}}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[R]{\thepage}
+{\sffamily\LARGE Project Deliverable Information Sheet \par}
+
+\begin{center}
+\begin{tabular}{ | m{5.2cm}| m{10.7cm} | }
+\hline
+Project Reference No. & 823852 \\
+\hline
+Project acronym: & PaNOSC \\
+\hline
+Project full name: & Photon and Neutron Open Science Cloud \\
+\hline
+H2020 Call: & INFRAEOSC-04-2018 \\
+\hline
+Project Website: & www.panosc.eu \\
+\hline
+Deliverable No: & D5.1 Prototype simulation data formats as openPMD domain specific extensions including example datasets \\
+\hline
+Deliverable Type: & Report \\
+\hline
+Dissemination Level: & Public \\
+\hline
+Contractual Delivery Date: & 31/11/2019 \\
+\hline
+Actual Delivery Date: & \today \\
+\hline
+EC project Officer: & Geert Vancraeynest \\
+\hline
+\end{tabular}
+\end{center}
+
+{\large \textbf{Document Control Sheet} \par}
+\begin{center}
+\begin{tabular}{ | m{5.2cm}| @{}c@{} | }
+\hline
+\textbf{Document}
+&
+\begin{tabular}{| m{10.7cm} |}
+Title D5.1 Prototype simulation data formats as openPMD domain specific extensions including example datasets \\\hline
+Version: 1 \\\hline
+Available at: \\\hline
+Files: 1 \\\hline
+\end{tabular}
+\tabularnewline\hline
+\textbf{Authorship}
+&
+\begin{tabular}{| m{10.7cm} |}
+Written by: Carsten Fortmann-Grote, Juncheng E, Aljosa Hafner, Mads Bertelsen \\\hline
+Contributors: \\
+Reviewed by: \\\hline
+Approved:  \\\hline
+\end{tabular}
+\tabularnewline\hline
+\end{tabular}
+\end{center}
+
+{\large \textbf{List of participants} \par}
+\begin{center}
+    \begin{tabular}{|m{3.0cm}|m{9.5cm}|m{3cm}|}
+        \hline
+        \textbf{Participant No.} & \textbf{Participant organisation name} & \textbf{Country} \\
+        \hline
+        1 & European Synchrotron Radiation Facility (ESRF) & France \\
+        \hline
+        2 & Institut Laue-Langevin (ILL) & France \\
+        \hline
+        3 & European XFEL (XFEL.EU) & Germany \\
+        \hline
+        4 & The European Spallation Source (ESS) & Sweden \\
+        \hline
+        5 & Extreme Light Infrastructure Delivery Consortium (ELI-DC) & Belgium \\
+        \hline
+        6 & Central European Research Infrastructure Consortium (CERIC-ERIC) & Italy \\
+        \hline
+        7 & EGI Foundation (EGI.eu) & The Netherlands \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\addtocontents{toc}{\protect\thispagestyle{fancy}}
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Standardized formatting and hierarchical organization of simulation data and associated metadata is paramount to support seamless
+exchange of data between simulation software in simulation pipelines and to benefit from 3rd party data visualization
+and analysis software that support these formats. By applying the openPMD metadata standard for particle and mesh data \cite{Huebl2015} to all simulated data in
+WP5, our workflows and results become accessible, inter--operable, and reusable, i.e. in line with the core concepts of
+FAIR Data Principles \cite{Wilkinson2016}.
+
+This report details the metadata standard extensions for simulation data developed in Work Package 5 (WP5) of the Photon
+and Neutron Open Science Cloud (PaNOSC). The openPMD standard in its current version 1.1 is the basis on which we have
+developed domain specific extensions for the simulation stages of start--to--end photon and neutron experiment
+simulations:
+\begin{enumerate}
+  \item Coherent wavefront propagation (simulation of coherent lightsources and beam transport)
+  \item Photon raytracing (simulation of x--ray optical beamline components, incoherent sources)
+  \item Neutron raytracing (simulation of neutron beamlines)
+  \item Molecular dynamics simulations (target simulations, radiation--matter interaction)
+\end{enumerate}
+
+All extensions are deposited under the WP5 github project at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard} in
+the branch ``upcoming-2.0'' in fulfillment of the project deliverable D5.1 of PaNOSC. To expose our standard extensions
+to the wider community, we will propose to merge them into the base standard repository
+\url{https://github.com/openPMD/openPMD-standard} after the Deliverable has been accepted.
+
+\section{The openPMD base standard}
+OpenPMD stands for open particle and mesh data and was initially developed as a metadata and data hierarchy standard for
+particle--in--cell (PIC) simulations of high--power laser--matter interaction at the Helmholtz--Zentrum Dresden--Rossendorf.
+Due to its flexibility (allowing for adaptation and adjustments for other applications than PIC), independence from the
+actual file format (supporting e.g. hdf5 \cite{HDFGroup1997}, netCDF \cite{Rew1989}, adios \cite{Liu2014} and json
+\cite{json2019} and
+more), and being maintained by an active open source community, the openPMD standard is widely adopted in numerous
+simulation codes, visualization codes, and simulation workflow platforms.
+
+The base standard structures simulation data by the following characteristics:
+\begin{enumerate}
+  \item The Series: The root object of the data hierarchy.
+  \item Iteration: Simulation time step (the time stamp of a given simulation snapshot)
+  \item Particle  or mesh
+  \item Type of particle (e.g. electron, proton) or mesh (e.g. electric field, magnetic field).
+  \item Records (Physical variables):
+    \begin{itemize}
+      \item For particles: Position and momentum (velocity) vector components
+      \item For meshes: Field values (components for vector fields)
+    \end{itemize}
+\end{enumerate}
+In addition, the standard defines a number of mandatory and optional metadata information to define and specify the
+physical meaning of the data. E.g. for particle data, each record must provide information about the physical unit in
+which its data is written. A mesh must provide the grid spacing, dimensionality, extension, and geometry and, where
+appropriate, the corresponding units. An iteration must provide which physical time it corresponds to. Further metadata
+about the code that produced the data, the data author, the time and date of the simulation, the version of the standard
+that this data was formatted against, are provided as attributes of the Series.
+
+\section{OpenPMD extensions}
+
+\subsection{Wavefront data}
+Coherent wavefront propagation plays an import role in the simulation of coherent light sources, such as free--electron
+lasers. Applications include studying the intensity and phase distributions at the experimental interaction point and
+effects of misalignments, pointing errors, fluctuations in the temporal, spatial, and spectral pulse structure on the
+latter.
+
+During a wavefront simulation, the horizontal and vertical polarization components of the complex electric field is calculated at a given position in the path of the light
+pulse in three dimensions: horizontal and vertical position in a plane perpendicular to the beam axis and time. From
+this data, all observables such as intensity, phase, polarization, divergence, pointing, energy spectrum and other, can
+be calculated. The information is complete in the sense, that the propagation can be continued further down the
+beamline from a simulation that stopped at an upstream position. The temporal sampling resolves the slowly varying pulse
+envelope but not every single oscillation of the the laser fundamental frequency.
+
+The electric field components as defined above are the required data records for the wavefront domain extension.
+Besides, the standard requires information about the radius of curvature in horizontal and in vertical direction, its
+standard deviation, as well as the standard photon energy to be given as attributes of the Series. Furthermore, it must
+be specified whether the data represents the pulse in the time or in the frequency domain, and in the cartesian, or in
+the reciprocal space.
+
+This domain extension can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/upcoming-2.0.0/EXT_WAVEFRONT.md}.
+An example dataset is published on zenodo at \url{https://dx.doi.org/10.5281/zenodo.3524710}
+\cite{Fortmann-Grote:zenodo2019}.
+
+Example python code how to write and read can be found in the python simulation library SimEx,
+\url{https://github.com/eucall-software/simex_platform/blob/openpmd/Sources/python/SimEx/Utilities/wpg_to_opmd.py}.
+
+\subsection{Raytracing data}
+\subsubsection{Neutrons}
+The field of neutron scattering relies heavily on Monte Carlo raytracing simulations for design of instrumentation. The low
+brilliance of neutron sources means that larger beams are required to achieve the necessary intensity, and thus the point
+approximations used in most analytical calculations are inadequate. Raytracing simulations provides a phase-space description
+of the neutron beam at the sample position, but it is also possible to do virtual experiments that include the sample physics
+resulting in expected intensity on the detector.
+
+In Monte Carlo raytracing simulations a large number of random initial neutron states are generated from realistic random
+distributions or loaded from a file. The neutron state includes position, velocity, polarization, weight and time. The
+physical unit of the weight is neutrons/s, as the expected intensity of the source is split into the total weight of simulated
+rays. These rays are propagated through an instrument, and the neutron weights are lowered to account for  absorption or
+reflectivity losses. The weights can also be manipulated to provide variance reduction, for example by focusing all scattering
+towards the detector and reducing the weight with the appropriate factor based on the solid angle of the detector. The
+intensity expected in a pixel of a detector is then the sum of the weights of neutrons that arrived in that pixel.
+
+The openPMD extension for neutron raytracing simulations contains the necessary fields for describing neutron state,
+facilitating transfer of neutron rays between different simulation tools. The different simulation packages include different
+capabilities, and thus it can be useful to switch from one package to another to get the highest accuracy possible.
+
+The proposed domain extension for neutron scattering can be found at
+\url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/upcoming-2.0.0/EXT_NRAYTRACING.md}.
+An example mock data set is published on Zenodo along with the code used to generate the dataset \cite{Bertelsen:zenodo2019}.
+
+\subsubsection{Photons}
+Raytracing is extensively used in the design and performance assessment of X-ray beamlines. It allows for simulation of different properties of the beam, such as the spot size, divergence and generally propagate rays through the beamline. To do this, a number of rays $N$ are first initialized according to spatial and energy distributions, corresponding to the source (bending magnet, undulator, etc.) properties. Each ray is then propagated from one to the next optical element (plane mirror, elliptical mirror, etc.) and the position and divergence of the beam are stored for each position. This way, a full description of the beam can be had at any point downstream and allows for easy modifications to the beamline, making use of the previously calculated unchanged parts.
+
+One of such codes is called ShadowOui and is a part of the OASYS framework \cite{Rebuffi2016}. In the PaNOSC project, other potentially interoperable codes (e.g. Simex) where identified and a common data format, allowing for linking the output of one code and the input to another, has been proposed and devised. The openPMD extension for X-ray/photon raytracing contains all the necessary information for that. Additionally to the position and the direction, it includes the following information: the energy of the rays, phases for P- and S- polarized photons and the P- and S- polarized components.
+
+The extension can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/upcoming-2.0.0/EXT_PRAYTRACE.md} and its example data file and the code used to generate it has been published on Zenodo \cite{Hafner:zenodo2019}.
+
+\subsection{Molecular Dynamics data}
+Molecular dynamics (MD) is a long--established computer simulation method to analyze atom/molecular movements by solving Newton's
+equations of motion assuming a given potential energy function. It is broadly used in statistical physics, physical chemistry,
+structural biology, material science, and crystallography. MD simulation is an important tool to predict the response of a
+molecular system to external fields as well as to probes such as photon or neutron beams.
+% As many researches in above disciplines are largely dependent
+% on advanced light sources like synchrotron and free--electron lasers, MD simulation becomes an important tool to predict the
+% results of the experiments conducted in these large light source facilities.
+
+With MD simulation, the structural evolution of the experimental sample can be modeled. Depending on the computing power, the time scale
+of the model can range from fs to ns, and the length scale can be up to several hundred nm. The fact that the scales are
+close the the experimental scales and the atomic-level simulation solution make it possible to calculate
+scattering signals from the MD atomic configuration which is comparable to the experimental sample. This kind of simulations has already
+been used in the researches of deformation under high pressure\cite{kimminau2008jpcm,tang2017jap,tang2018jsr,zhang2019jsr},
+crystallization \cite{e2015}, and crystallography \cite{coleman2013msmse} to predict diffraction patterns for experimental design
+and interpretation.
+
+% Not only the event that people want to explore in experiment, but also the interaction between sample and incident X--ray can be considered
+% in MD simulations.
+Radiation damage induced by high--intensity X-ray is assumed to be one of the limiting factors
+for achieving subnanometer X-ray imaging of single particles\cite{caleman2011acsn}. With MD simulation codes considering ionization
+process like GROMACS\cite{lindahl2001} and XMDYN\cite{jurek2016}, the effects of radiation damage on the reconstruction resolution
+of single particle imaging can be investigated.
+
+The necessary output of MD simulation is the coordinate of each atom for each atom species in the sample structure. Besides that, the velocity of each atom,
+the simulation box and the force fields implemented should be recorded if a restart of previous simulation is asked for. Simulation box defines the extent of
+the coordinates of simulated atoms. Dimension and boundary are the attributes of box required for MD simulation. Boundary defines the periodicity of each axis of the box.
+Edge defines the shape of simulation box and allows the box to be triclinic.
+
+This domain extension can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/upcoming-2.0.0/EXT_MD.md}.
+An example dataset is published on zenodo at \url{https://dx.doi.org/10.5281/zenodo.3525951}
+\cite{Juncheng:zenodo2019}.
+
+Example python code to convert the output of XMDYN to comply the MD domain extension can be found here
+\url{https://github.com/ejcjason/MDDomainExtension/blob/master/xmdyn_to_opmd.py}.
+\fancypagestyle{plain}{}
+\printbibliography
+\end{document}
