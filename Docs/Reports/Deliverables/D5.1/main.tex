@@ -4,7 +4,7 @@
 \usepackage{setspace}
 \usepackage{array}
 \usepackage{fancyhdr}
-\usepackage[]{biblatex}
+\usepackage[style=science]{biblatex}
 \addbibresource{references.bib}
 % Set date format
 \usepackage[ddmmyyyy]{datetime}
@@ -41,7 +41,7 @@
     pdfmenubar=true,                                              % show Acrobat’s menu?
     pdffitwindow=false,                                           % window fit to page when opened
     pdfstartview={FitH},                                          % fits the width of the page to the window
-    pdfauthor={C. Fortmann-Grote, Juncheng E},                                           % author
+    pdfauthor={C. Fortmann-Grote, Juncheng E, Aljosa Hafner, Mads Bertelsen},                                           % author
     pdftitle={D5.1: Prototype simulation data formats as openPMD domain specific extensions including example datasets},   % title
     pdfsubject={PaNOSC WP5 (ViNYL) Deliverable D5.1},                             % subject of the document
     pdfcreator={pdflatex},                                         % creator of the document
@@ -131,7 +131,7 @@ Files: 1 \\\hline
 \textbf{Authorship}
 &
 \begin{tabular}{| m{10.7cm} |}
-Written by: Carsten Fortmann-Grote, Juncheng E \\\hline
+Written by: Carsten Fortmann-Grote, Juncheng E, Aljosa Hafner, Mads Bertelsen \\\hline
 Contributors: \\
 Reviewed by: \\\hline
 Approved:  \\\hline
@@ -248,25 +248,26 @@ Example python code how to write and read can be found in the python simulation 
 
 \subsection{Raytracing data}
 \subsubsection{Neutrons}
-The field of neutron scattering relies heavily on Monte Carlo raytracing simulations for design of instrumentation. The low 
-brilliance of neutron sources means that larger beams are required to achieve the necessary intensity, and thus the point 
-approximations used in most analytical calculations are inadequate. Raytracing simulations provides a phase-space description 
-of the neutron beam at the sample position, but it is also possible to do virtual experiments that include the sample physics 
+The field of neutron scattering relies heavily on Monte Carlo raytracing simulations for design of instrumentation. The low
+brilliance of neutron sources means that larger beams are required to achieve the necessary intensity, and thus the point
+approximations used in most analytical calculations are inadequate. Raytracing simulations provides a phase-space description
+of the neutron beam at the sample position, but it is also possible to do virtual experiments that include the sample physics
 resulting in expected intensity on the detector.
 
-In Monte Carlo raytracing simulations a large number of random initial neutron states are generated from realistic random 
-distributions or loaded from a file. The neutron state includes position, velocity, polarization, weight and time. The 
-physical unit of the weight is neutrons/s, as the expected intensity of the source is split into the total weight of simulated 
-rays. These rays are propagated through an instrument, and the neutron weights are lowered to account for  absorption or 
-reflectivity losses. The weights can also be manipulated to provide variance reduction, for example by focusing all scattering 
-towards the detector and reducing the weight with the appropriate factor based on the solid angle of the detector. The 
-intensity expected in a pixel of a detector is then the sum of the weights of neutrons that arrived in that pixel. 
+In Monte Carlo raytracing simulations a large number of random initial neutron states are generated from realistic random
+distributions or loaded from a file. The neutron state includes position, velocity, polarization, weight and time. The
+physical unit of the weight is neutrons/s, as the expected intensity of the source is split into the total weight of simulated
+rays. These rays are propagated through an instrument, and the neutron weights are lowered to account for  absorption or
+reflectivity losses. The weights can also be manipulated to provide variance reduction, for example by focusing all scattering
+towards the detector and reducing the weight with the appropriate factor based on the solid angle of the detector. The
+intensity expected in a pixel of a detector is then the sum of the weights of neutrons that arrived in that pixel.
 
-The openPMD extension for neutron raytracing simulations contains the necessary fields for describing neutron state, 
-facilitating transfer of neutron rays between different simulation tools. The different simulation packages include different 
+The openPMD extension for neutron raytracing simulations contains the necessary fields for describing neutron state,
+facilitating transfer of neutron rays between different simulation tools. The different simulation packages include different
 capabilities, and thus it can be useful to switch from one package to another to get the highest accuracy possible.
 
-The proposed domain extension for neutron scattering can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/domex_neutron_raytracing/EXT_NRAYTRACING.md}.
+The proposed domain extension for neutron scattering can be found at
+\url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/upcoming-2.0.0/EXT_NRAYTRACING.md}.
 An example mock data set is published on Zenodo along with the code used to generate the dataset \cite{Bertelsen:zenodo2019}.
 
 \subsubsection{Photons}
@@ -274,22 +275,22 @@ Raytracing is extensively used in the design and performance assessment of X-ray
 
 One of such codes is called ShadowOui and is a part of the OASYS framework \cite{Rebuffi2016}. In the PaNOSC project, other potentially interoperable codes (e.g. Simex) where identified and a common data format, allowing for linking the output of one code and the input to another, has been proposed and devised. The openPMD extension for X-ray/photon raytracing contains all the necessary information for that. Additionally to the position and the direction, it includes the following information: the energy of the rays, phases for P- and S- polarized photons and the P- and S- polarized components.
 
-The extension can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/latest/EXT_PRAYTRACE.md} and its example data file and the code used to generate it has been published on Zenodo \cite{Hafner:zenodo2019}.
+The extension can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/upcoming-2.0.0/EXT_PRAYTRACE.md} and its example data file and the code used to generate it has been published on Zenodo \cite{Hafner:zenodo2019}.
 
 \subsection{Molecular Dynamics data}
 Molecular dynamics (MD) is a long--established computer simulation method to analyze atom/molecular movements by solving Newton's
 equations of motion assuming a given potential energy function. It is broadly used in statistical physics, physical chemistry,
-structural biology, material science, and crystallography. MD simulation is an important tool to predict the response of a 
+structural biology, material science, and crystallography. MD simulation is an important tool to predict the response of a
 molecular system to external fields as well as to probes such as photon or neutron beams.
 % As many researches in above disciplines are largely dependent
-% on advanced light sources like synchrotron and free--electron lasers, MD simulation becomes an important tool to predict the 
+% on advanced light sources like synchrotron and free--electron lasers, MD simulation becomes an important tool to predict the
 % results of the experiments conducted in these large light source facilities.
 
-With MD simulation, the structural evolution of the experimental sample can be modeled. Depending on the computing power, the time scale 
-of the model can range from fs to ns, and the length scale can be up to several hundred nm. The fact that the scales are 
-close the the experimental scales and the atomic-level simulation solution make it possible to calculate 
+With MD simulation, the structural evolution of the experimental sample can be modeled. Depending on the computing power, the time scale
+of the model can range from fs to ns, and the length scale can be up to several hundred nm. The fact that the scales are
+close the the experimental scales and the atomic-level simulation solution make it possible to calculate
 scattering signals from the MD atomic configuration which is comparable to the experimental sample. This kind of simulations has already
-been used in the researches of deformation under high pressure\cite{kimminau2008jpcm,tang2017jap,tang2018jsr,zhang2019jsr}, 
+been used in the researches of deformation under high pressure\cite{kimminau2008jpcm,tang2017jap,tang2018jsr,zhang2019jsr},
 crystallization \cite{e2015}, and crystallography \cite{coleman2013msmse} to predict diffraction patterns for experimental design
 and interpretation.
 
@@ -300,10 +301,10 @@ for achieving subnanometer X-ray imaging of single particles\cite{caleman2011acs
 process like GROMACS\cite{lindahl2001} and XMDYN\cite{jurek2016}, the effects of radiation damage on the reconstruction resolution
 of single particle imaging can be investigated.
 
-The necessary output of MD simulation is the coordinate of each atom for each atom species in the sample structure. Besides that, the velocity of each atom, 
+The necessary output of MD simulation is the coordinate of each atom for each atom species in the sample structure. Besides that, the velocity of each atom,
 the simulation box and the force fields implemented should be recorded if a restart of previous simulation is asked for. Simulation box defines the extent of
 the coordinates of simulated atoms. Dimension and boundary are the attributes of box required for MD simulation. Boundary defines the periodicity of each axis of the box.
-Edge defines the shape of simulation box and allows the box to be triclinic. 
+Edge defines the shape of simulation box and allows the box to be triclinic.
 
 This domain extension can be found at \url{https://github.com/PaNOSC-ViNYL/openPMD-standard/blob/upcoming-2.0.0/EXT_MD.md}.
 An example dataset is published on zenodo at \url{https://dx.doi.org/10.5281/zenodo.3525951}
