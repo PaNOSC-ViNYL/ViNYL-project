@@ -5,18 +5,18 @@ Simulation APIs in ViNYL provide a harmonized user interface to simulation codes
 for various photon and neutron simulation tasks. The API is split into
 `Calculators` and `Parameters`. To every `Calculator` corresponds one
 `Parameters` class. `Parameters` are shallow objects (state engines) that
-encapsulate the various physical and numerical parameters needed to setup a
+encapsulate the physical and numerical parameters needed to setup a
 simulation. `Calculators` wrap their respective `backengine`, and manage
 input/output tasks.
 
 ## Calculators
 ### Specifications
-* Every backengine is represented by one and only one (specialized) API ("Calculator")
-* Specialized Calculators that represent the same or similar physics (e.g.
+* Every `backengine` is represented by one and only one (specialized) `Calculator`.
+* Different specialized `Calculators` that represent the same or similar physics (e.g.
   photon beam transport, scattering, detectors) derive from a common
-  ancestor, an Abstract Calculator.
-* All Abstract Calculator derive from the Abstract Base Calculator (ABCalc).
-* The basic user interface is defined on the level of the ABCalc:
+  ancestor, an `AbstractCalculator`.
+* All `AbstractCalculator`s derive from the `AbstractBaseCalculator` (`ABCalc`).
+* The basic user interface is defined on the level of the `ABCalc`:
     * Instantiation:
 
     ```
@@ -34,7 +34,6 @@ input/output tasks.
     ```
     calculator.dump(filename=...)
     ```
-
     The dump method is to be implemented using the `dill` library.
 
     * Resurrect a calculator from a dumpfile:
@@ -55,14 +54,14 @@ input/output tasks.
     data = calculator.data
     ```
 
-    * Write simulation data according to openpmd metadata standard to hdf file.
+    * Write simulation data to disk.
 
     ```
     calculator.saveH5(openpmd=True)
     ```
-    The `openpmd` flag instructs to write output to openpmd compliant hdf5 using
+    The `openpmd` flag (`bool`) instructs to write output to openpmd compliant `hdf5` file using
 the `openpmd-api` and applying the openpmd domain extensions developed in
-Deliverable D5.1.
+Deliverable D5.1. It's value is `True` by default.
 
 ## Parameters
 Simulation parameters (**not** input data) are encapsulated in a `CalculatorParameters`
