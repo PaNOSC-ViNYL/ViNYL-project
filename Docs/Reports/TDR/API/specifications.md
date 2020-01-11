@@ -1,6 +1,5 @@
 # Specifications for Simulation APIs in ViNYL
 
-
 Simulation APIs in ViNYL provide a harmonized user interface to simulation codes (aka "backengine")
 for various photon and neutron simulation tasks. The API is split into
 `Calculators` and `Parameters`. To every `Calculator` corresponds one
@@ -8,6 +7,15 @@ for various photon and neutron simulation tasks. The API is split into
 encapsulate the physical and numerical parameters needed to setup a
 simulation. `Calculators` wrap their respective `backengine`, and manage
 input/output tasks.
+
+## Example for illustration
+
+The class `XMDYNPhotonMatterInteractor` is a `Calculator` that wraps the code
+`XMDYN` from CFEL-Hamburg. It derives from the `AbstractPhotonMatterInteractor`
+as all other `Calculators` that wrap photon-matter interaction simulation codes.
+The `XMDYNPhotonMatterInteractor`'s corresponding parameter class is the
+`XMDYNPhotonMatterInteractorParameters` class. See below for how to istantiate
+("construct") a `Calculator` with its corresponding `Parameters`.
 
 ## Calculators
 ### Specifications
@@ -149,6 +157,23 @@ received {}.".format("WPG.Beamline", type(val)))
 
 ```
 
+## Pseudocode for a typical simulation script.
+
+```
+# Setup parameters.
+my_parameters = SomeParameters(param1=value*unit, ...)
+
+# Setup the calculator.
+my_calculator = SomeCalculator(parameters=my_parameters,
+                            inpath="/path/to/input/data",
+                            outpath="/path/to/output/data")
+
+# Run the simulation.
+my_calculator.run()
+
+# Write the simulation data.
+my_calculator.saveH5()
+```
 
 
 
