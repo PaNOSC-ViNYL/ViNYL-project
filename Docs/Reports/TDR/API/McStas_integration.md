@@ -8,7 +8,7 @@ The backengine is specified in another document, but here the most important par
 calculator = CalculatorName(parameters=parameters, inpath="/path/to/input/data", outpath="/path/to/output/data")
 parameters = CalculatorParameters(param1=value1*unit1, param2=value2*unit2, ...)
 ```
-The parameter class should not contain simulation code, but only parameters with consistensy checks.
+The parameter class should not contain simulation code, but only parameters with consistency checks.
 
 ## Instrument object from parameter class
 
@@ -98,7 +98,7 @@ data = my_calculator.data
 ```
 
 ## Directly supply a McStasScript object to parameters
-It would also be possible to let parameters contain an McStasScript instrument object, along with other requirements for the simulation. It is for example necessary to request a certain number of simulated rays (if a source is simulated), and this information is hard to fit into the preceeding schemes, but in this case would fit nicely into parameters.
+It would also be possible to let parameters contain an McStasScript instrument object, along with other requirements for the simulation. It is for example necessary to request a certain number of simulated rays (if a source is simulated), and this information is hard to fit into the preceding schemes, but in this case would fit nicely into parameters.
 
 
 ```
