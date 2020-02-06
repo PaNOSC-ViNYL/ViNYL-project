@@ -1,13 +1,18 @@
 # McStasScript integration into harmonized API
 
-Assuming the form of parameters and calculators:
+This document contains a few ideas for how McStasScript could be integrated into a SIMEX like python user interface called the backenginge. In SIMEX, simulation is performed by calculators objects that contain simulation code and takes input from parameter objects that specialized for each calculator.
+This user interface of McStasScript is heavily influenced by the necessity to input a lot of information into one calculator, where SIMEX is better suited for running a simulation based on a series of calculators. Reconciling the two will then most likely require concessions somewhere.
 
+The backengine is specified in another document, but here the most important part is how calculators and parameters are instantiated:
 ```
 calculator = CalculatorName(parameters=parameters, inpath="/path/to/input/data", outpath="/path/to/output/data")
 parameters = CalculatorParameters(param1=value1*unit1, param2=value2*unit2, ...)
 ```
+The parameter class should not contain simulation code, but only parameters with consistensy checks.
 
-Could take an McStasScript instrument object as “parameters”, inpath rarely necessary, could dump data in outpath. Would violate design principles on parameters, as the parameter object would contain methods
+## Instrument object from parameter class
+
+The calculator could take a McStasScript instrument object as “parameters”, inpath rarely necessary, could dump data in outpath. Would violate design principles on parameters, as the parameter object would contain methods
 for performing the simulation.
 
 ```
@@ -46,6 +51,8 @@ my_calculator.run()
  
 data = my_calculator.data
 ```
+
+## Instrument object from calculator
 
 Calculator could also be used to instantiate an instrument object, the only
 problem is that it does not make much sense to insert parameters
