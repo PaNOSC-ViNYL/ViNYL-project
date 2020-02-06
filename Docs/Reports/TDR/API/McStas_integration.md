@@ -19,9 +19,8 @@ for performing the simulation.
 # my parameters is McStasScript instrument object
 my_parameters = McStasScript(name=“ODIN”, author=“Mads”)
  
-# Now that my_parameters is an instrument object, information can slowly
-be added
-src = my_parameters.add_component(“source”, “source_simple”)
+# Now that my_parameters is an instrument object, information can slowly be added
+src = my_parameters.add_component(“source”, “Source_simple”)
 src.xwidth = 0.1
 src.yheight = 0.1
 src.E0 = 10
@@ -46,11 +45,19 @@ beam_dir.set_ROTATED([0,”two_theta”,0], RELATIVE=“source”)
 # Could have necessary datafiles and similar in inpath
 # Results written to outpath
 my_calculator = McStas(parameters=my_parameters, inpath=“/path/to/input/data”, outpath=“/path/to/output/data”)
- 
-my_calculator.run()
- 
+
+# Need to supply instrument parameters to calculator, here through input dict
+my_calculator.run(input={"theta": 25}, ncount=1E7)
+
 data = my_calculator.data
 ```
+Issues with this approach:
+* Parameter class contains simulation method
+* May require input of settings at calculator.run(), but could be carried in parameters.
+
+Benefits with this approach:
+* Can use most of the McStasScript interface
+* Follows large part of the specifications
 
 ## Instrument object from calculator
 
@@ -67,8 +74,7 @@ performed somewhere.
 # my parameters is small and almost trivel
 my_parameters = McStasParameters(name=“ODIN”, author=“Mads”)
  
-my_calculator = McStasScript(parameters=my_parameters,
-inpath=“/path/to/input/data”, outpath=“/path/to/output/data”)
+my_calculator = McStasScript(parameters=my_parameters, inpath=“/path/to/input/data”, outpath=“/path/to/output/data”)
  
 src = my_calculator.add_component(“source”, “source_simple”)
 src.xwidth = 0.1
@@ -92,14 +98,20 @@ beam_dir = my_calculator.add_component(“beam_dir”, “Arm”)
 beam_dir.set_AT([0,0,0], RELATIVE=“mono”)
 beam_dir.set_ROTATED([0,”two_theta”,0], RELATIVE=“source”)
  
-my_calculator.run(input = {“theta”: 25))
+my_calculator.run(input = {“theta”: 25}, ncount=1E7)
  
 data = my_calculator.data
 ```
+Issues with this approach:
+* May require input of some parameters at calculator.run(), but could be carried in parameters
+* Parameters do no carry much information and does not get a chance to do much input sanitation
+
+Benefits with this approach:
+* Can use most of the McStasScript interface
+* McStasScript completely integrated, and almost fits within specifications
 
 ## Directly supply a McStasScript object to parameters
 It would also be possible to let parameters contain an McStasScript instrument object, along with other requirements for the simulation. It is for example necessary to request a certain number of simulated rays (if a source is simulated), and this information is hard to fit into the preceding schemes, but in this case would fit nicely into parameters.
-
 
 ```
 Instr = McStasScript.McStas_instr(name=“ODIN”, author=“Mads”)
@@ -135,7 +147,12 @@ my_calculator.run()
  
 data = my_calculator.data
 ```
+Issues with this approach:
+* Not really harmonized, as McStasScript is just used next to the API
 
+Benefits with this approach:
+* Can use most of the McStasScript interface
+* Actually fits with specifications, but McStasScript more seperated from backengine that others
 
 
 
