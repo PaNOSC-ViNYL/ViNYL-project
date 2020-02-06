@@ -96,3 +96,48 @@ my_calculator.run(input = {“theta”: 25))
  
 data = my_calculator.data
 ```
+
+## Directly supply a McStasScript object to parameters
+It would also be possible to let parameters contain an McStasScript instrument object, along with other requirements for the simulation. It is for example necessary to request a certain number of simulated rays (if a source is simulated), and this information is hard to fit into the preceeding schemes, but in this case would fit nicely into parameters.
+
+
+```
+Instr = McStasScript.McStas_instr(name=“ODIN”, author=“Mads”)
+
+src = Instr.add_component(“source”, “source_simple”)
+src.xwidth = 0.1
+src.yheight = 0.1
+src.E0 = 10
+src.dE = 2
+ 
+Instr.add_parameter(“theta”, value=10)
+ 
+mono = Instr.add_component(“mono”, “Monochromator_flat”)
+mono.xwidth = 0.03
+mono.yheight = 0.05
+mono.Q = 1.22
+mono.set_AT([0, 0, 1], RELATIVE=“source”)
+mono.set_ROTATED([0, “theta”, 0], RELATIVE=“source”)
+ 
+Instr.add_declare_var(“two_theta”)
+Instr.append_initialize(“two_theta = 2.0*theta;”)
+ 
+beam_dir = Instr.add_component(“beam_dir”, “Arm”)
+beam_dir.set_AT([0,0,0], RELATIVE=“mono”)
+beam_dir.set_ROTATED([0,”two_theta”,0], RELATIVE=“source”)
+
+# Create parameter object
+my_parameters = McStasParameters(instr=Instr, ncount=1E7, gravity=True, input= {"theta" : 25})
+
+my_calculator = McStasScript(parameters=my_parameters, inpath=“/path/to/input/data”, outpath=“/path/to/output/data”)
+ 
+my_calculator.run()
+ 
+data = my_calculator.data
+```
+
+
+
+
+
+
