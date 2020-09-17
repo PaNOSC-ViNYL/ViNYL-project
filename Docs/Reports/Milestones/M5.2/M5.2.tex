@@ -1,0 +1,137 @@
+\documentclass[10pt]{scrartcl}
+\input{panosc_header}
+
+% sophisticated linking of references in the pdf and setting some options
+\usepackage{url}                                                  % for correct typesettings of URLs
+\usepackage{hyperref}                                             % for sophisticated linking of urls, dois, pictures, tables, etc.
+\hypersetup{
+    unicode=true,                                                 % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,                                              % show Acrobat’s toolbar?
+    pdfmenubar=true,                                              % show Acrobat’s menu?
+    pdffitwindow=false,                                           % window fit to page when opened
+    pdfstartview={FitH},                                          % fits the width of the page to the window
+    pdfauthor={C. Fortmann-Grote},                                           % author
+    pdftitle={MS5.2: Demonstration of simulation services},   % title
+    pdfsubject={PaNOSC WP5 (ViNYL) Milestone MS5.2},                             % subject of the document
+    pdfcreator={pdflatex},                                         % creator of the document
+    pdfkeywords={PaNOSC, ViNYL, simulations, jupyter, simex, oasys, McStas,
+    service},                                         % list of keywords
+    pdfnewwindow=true,                                            % links in new PDF window
+    colorlinks=true,                                              % false: boxed links; true: colored links
+    linkcolor=blue,                                                % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,                                                % color of links to bibliography
+    filecolor=blue,                                               % color of file links
+    urlcolor=blue                                                 % color of external links
+}
+
+\begin{document}
+\makeatletter
+\begin{titlepage}
+\thispagestyle{scrheadings}
+\ohead{}
+\ihead{}
+\chead{}
+\ifoot{}
+\ofoot{}
+\noindent%
+\includegraphics[width=0.4\textwidth]{figures/PaNOSClogo_web_RGB_512x512.jpg}\\
+\Huge{%
+\renewcommand{\baselinestretch}{2.0}%
+  \textbf{%
+    Milestone MS5.2: Demonstration of simulation services\\
+  }%
+}%
+\\
+{%
+\Large{%
+  Carsten Fortmann-Grote,
+  Mads Bertelsen,
+  Thomas Holm Rod,\\
+  Manuel Sanchez-Rio,
+  Tom Schoonjans
+  \bigskip\\
+  \bigskip\\
+  \textbf{\today}%
+}}%
+\end{titlepage}
+\makeatother
+
+%\tableofcontents
+\section{Introduction}
+% This is the milestone report for the task, demonstration of simulation services
+% We have the following packages
+% 
+
+% This is a report for milestone and work package 5
+% Responsibility of the work package: harmonize API's to simulation
+% 
+
+This report outlines the documented simulation APIs released under PaNOSC work package 5 and constitutes our second milestone. The work package is internally named the Virtual Neutron and X--Ray Laboratory ``ViNYL'', and is responsible for exposing simulation packages in a cloud environment with a unified user interface. Here we demonstrate the underlying APIs that will provide users access to the simulation packages through a documented python interface.
+
+The major simulation packages exposed in ViNYL are simex, McStas and Oasys. Simex is a python based tool for simulation of X-ray beamlines, and connects to a large number of simulation backengines. In some ways, simex serves as the template for how ViNYL can later harmonize access to more simulation packages.
+
+McStas is a neutron instrumentation simulation package that uses a meta-language built on C as a user interface, which is more difficult to expose to a cloud based solution. Work package 5 is providing a python API for McStas called McStasScript which is more suitable for exposing through a cloud service such as a Jupyter Hub.
+
+The last major project in ViNYL is Oasys which provides a graphical user interface to simulation of X-ray beamlines. This project will be made available through remote desktop software due to the need for the graphical user interface.
+
+With the APIs ready, ViNYL is now ready to harmonize these into the collected pyvinyl package that will provide an interface to simulation of both X-ray and neutron beamlines.
+
+%A major objective of work package 5 is to harmonize the APIs into a single interface,
+
+\section{SiMEX}
+% Introduction to the package, why is it in work package 5
+
+\subsection{Capabilities}
+% What kind of simulations can be performed with this user interface
+
+\subsection{Documentation}
+% Overview of the available documentation, with links if appropriate
+
+\subsection{Code availablity}
+% Where is the code developed (github repo), how is it installed and where is it available?
+
+\section{oasys}
+% Introduction to the package, why is it in work package 5
+
+\subsection{Capabilities}
+% What kind of simulations can be performed with this user interface
+
+\subsection{Documentation}
+% Overview of the available documentation, with links if appropriate
+
+\subsection{Code availablity}
+% Where is the code developed (github repo), how is it installed and where is it available?
+
+\section{McStasScript}
+McStasScript is a python API to the McStas package which is capable of simulating neutron scattering instrumentation. Using McStasScript, McStas simulations can be built and executed directly from a python interface. The resulting data from the simulations are made available as python data structures. These tasks are appropriate for Jupyter Notebooks which are more suitable to being exposed as a cloud service than the traditional McStas workflow.
+
+\subsection{Capabilities}
+McStasScript is an API to McStas, and covers nearly the entire set of McStas features. McStas is widely used for design of neutron scattering instrumentation, usually used for simulation from the neutron moderator to detector including sample physics. The package includes the tools necessary for simulating optics, samples of different types, sample environment and detectors.
+
+\subsection{Documentation}
+Documentation for McStasScript is provided in several forms that suits different kinds of users and developers. Some understanding of the underlying McStas package is necessary, the basics of which are available through the Jupyter Notebook tutorials.
+
+\begin{itemize}
+  \item \href{https://github.com/PaNOSC-ViNYL/McStasScript/blob/master/McStasScript_developer_documentation.pdf}{Classic manual} in pdf format outlining all userfacing classes and methods
+  \item \href{https://github.com/PaNOSC-ViNYL/McStasScript/blob/master/McStasScript_documentation.pdf}{Developer documentation} in pdf format explaining development principles and class diagram
+  \item \href{https://github.com/PaNOSC-ViNYL/McStasScript/tree/master/tutorial}{Set of 11 Jupyter notebooks} that demonstrates and teaches McStas and McStasScript
+  \item Documentation strings in python classes and methods that provide help during use
+\end{itemize}
+
+\subsection{Code availablity}
+The McStasScript API is a pure python package, and is distributed with pypi making installation easy. McStas is to be installed separately, and McStasScript needs to be configured to find the underlying McStas installation. McStas and McStasScript are also available together in a single docker container where configuration is already performed.
+
+\begin{tabular}{|l|l|l|l|}
+  \hline
+  \textbf{Description} & \textbf{Link} \\
+  \hline
+  McStas GitHub repository & \url{https://github.com/McStasMcXtrace/McCode} \\
+  McStasScript GitHub repository & \url{https://github.com/PaNOSC-ViNYL/McStasScript} \\
+  McStasScript pypi page & \url{https://pypi.org/project/McStasScript/} \\
+  McStas + McStasScript docker image & \url{https://hub.docker.com/r/mccode/mcstas-2.6.1-mcstasscript} \\  
+  \hline
+\end{tabular}
+
+
+\end{document}
+
