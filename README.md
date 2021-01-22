@@ -44,20 +44,22 @@ Using the APIs from T5.1, expose photon source simulations as a cloud service fo
 
 ### Task 5.3 Photon and Neutron beamline simulation data services (M13-M36) Lead: ILL, CERIC-ERIC Contributors: ESRF, XFEL.EU, ELI
 Expose photon and neutron beamline optics simulation services for photon and neutron facilities. Description of the beamline elements, deployment of scattering models for interaction of photon beams or wavefronts with optical elements (mirrors, crystals, lenses) and simulation data deposition in a database. Reuse existing libraries such as as SYNED, WOFRY, and support workflow-based high level user interface OASYS. Populate an instrument simulation database.
-    • Jupyter-notebook and execution environment (see WP4)
-    • local OASYS workflows to access remote instrument description and data
-    • remote desktop session and execution environment (see WP4)
+    
+    - Jupyter-notebook and execution environment (see WP4)
+    - local OASYS workflows to access remote instrument description and data
+    - remote desktop session and execution environment (see WP4)
 
 ### Task 5.4 Simulation of signal generation including radiation-matter interaction  (M25-M48)  Lead: ESS, Contributors: ILL, XFEL.EU, ELI, CERIC-ERIC
 Enable simulation of scattering signals from given sample structural dataset and beamline propagation data as a cloud service. 
 Simulate interaction of radiation (from T5.2) with sample structural data stored e.g. in NOMAD as well as scattering and absorption signals.
-    • Jupyter-notebook and execution environment
-    • remote desktop session and execution environment
-    • Protocol for comparison of raw simulated data vs. raw experimental data
+    
+    - Jupyter-notebook and execution environment
+    - remote desktop session and execution environment
+    - Protocol for comparison of raw simulated data vs. raw experimental data
 
 ### Task 5.5 Integrated simulation data workflows (M37-M48) Lead: XFEL.EU Contributors: ESRF, ILL, ESS, CERIC-ERIC 
-    • Expose simulation data services in data analysis frameworks accessed via Jupyter notebooks or remote desktop solutions.
-    • Iterative data analysis workflows including experiment simulations
+    - Expose simulation data services in data analysis frameworks accessed via Jupyter notebooks or remote desktop solutions.
+    - Iterative data analysis workflows including experiment simulations
 
 ## Deliverables
 5.1 Prototype simulation data formats as openPMD domain specific extensions  including example datasets (M12, R, PU, XFEL.EU, ESS)
