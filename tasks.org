@@ -1,0 +1,376 @@
+#+PROPERTY: Effort_ALL 2d 5d 10d 20d 30d 35d 50d
+#+PROPERTY: Duration_ALL 2d 5d 10d 20d 30d 35d 50d
+#+PROPERTY: Allocate_ALL alijosa shervin mads carsten jun mousumi reviewers
+#+PROPERTY: ORDERED_ALL  t 
+#+PROPERTY: BLOCKER_ALL previous-sibling
+#+COLUMNS: %70ITEM(Task) %3EFFORT(Effort) %3DURATION(Duration) %10allocate(Allocate) %id %20depends %1ORDERED(ORDERED) %BLOCKER(BLOCKER) %SCHEDULED(start_date) %DEADLINE
+#+STARTUP: CONTENT
+
+* Resources                                            :taskjuggler_resource:
+** Review
+ :PROPERTIES:
+ :id:       reviewers
+:END:
+*** None
+    :PROPERTIES:
+    :resource_id: none
+    :END:
+*** Mads
+    :PROPERTIES:
+    :resource_id: mads
+    :leaves: project 2021-09-20 - 2021-11-31
+    :END:
+*** Jun 
+    :PROPERTIES:
+    :resource_id: jun
+    :END:
+*** Shervin
+    :PROPERTIES:
+    :resource_id: shervin
+    :vacation:  2021-10-23 - 2021-11-07, 2021-12-18 - 2022-01-02
+    :END:
+*** Alijosa
+    :PROPERTIES:
+    :resource_id: alijosa
+    :END:
+*** Mousumi
+    :PROPERTIES:
+    :resource_id: mousumi
+    :END:
+*** Cartsten
+    :PROPERTIES:
+    :resource_id: carsten
+    :limits:   {weeklymax 1d}
+    :END:
+
+
+
+* PANOSC WP5 :taskjuggler_project:
+  SCHEDULED: <2021-09-18 Sat> DEADLINE: <2022-11-30 Wed>
+  :PROPERTIES:
+  :DEPENDS_ALL: mcstas_libpyvinyl
+  :trackingscenario: plan
+  :END:
+** TODO Protocol comparison sim vs data and sim vs sim
+   DEADLINE: <2021-09-30 Thu>
+   :PROPERTIES:
+   :DURATION:   5d
+   :ALLOCATE: shervin,carsten,mads,jun,mousumi,alijosa
+   :END:
+
+** TODO OpenPMD
+   :PROPERTIES:
+   :END:
+*** TODO raytracing extension
+    :PROPERTIES:
+    :id:       openpmd_ray_ext
+    :ORDERED:  t
+    :END:
+**** TODO Prepare PR to openPMD standard
+     :PROPERTIES:
+     :EFFORT:   5d
+     :ALLOCATE: alijosa
+     :END:
+**** TODO Interal review
+     :PROPERTIES:
+     :ALLOCATE: shervin, mads, carsten
+     :ID:       openpmd_ray_ext_review
+     :DURATION:   2d
+     :ORDERED:  t
+     :END:
+**** TODO Submission and follow up till integration
+     :PROPERTIES:
+     :EFFORT:   5d
+     :ALLOCATE: alijosa
+     :ORDERED:  t
+     :END:
+*** TODO raytracing C++ API
+    :PROPERTIES:
+    :start_date: <2021-09-01 Wed>
+    :id:       openpmd_ray_cpp_api
+    :ALLOCATE: shervin
+    :END:
+**** DONE Implementation
+     :PROPERTIES:
+     :DEPENDS:  openpmd_ray_ext_review
+     :EFFORT:   5d
+     :effortdone: 5d
+     :ALLOCATE: shervin
+     :END:
+**** TODO Internal Review Implementation
+     :PROPERTIES:
+     :ALLOCATE: reviewers
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :DURATION: 2d
+     :END:
+**** TODO Documentation
+     :PROPERTIES:
+     :EFFORT:   2d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+**** TODO Tests
+     :PROPERTIES:
+     :EFFORT:   5d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+**** TODO CI   
+     :PROPERTIES:
+     :EFFORT:   2d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+**** Contingency
+     :PROPERTIES:
+     :DURATION:   10d
+     :BLOCKER:  previous-sibling
+     :allocate: none
+     :END:
+**** TODO Release
+     :PROPERTIES:
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+*** TODO McStas openPMD I/O component    
+    :PROPERTIES:
+    :ALLOCATE: shervin
+    :BLOCKER:  previous-sibling
+    :END: 
+**** TODO Implementation
+     :PROPERTIES:
+     :EFFORT:   5d
+     :ALLOCATE: shervin
+     :END:
+**** TODO Internal Review Implementation
+     :PROPERTIES:
+     :ALLOCATE: reviewers
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :DURATION: 2d
+     :END:
+**** TODO Documentation
+     :PROPERTIES:
+     :EFFORT:   2d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+**** TODO Tests
+     :PROPERTIES:
+     :EFFORT:   5d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+**** TODO CI   
+     :PROPERTIES:
+     :EFFORT:   2d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+**** Contingency
+     :PROPERTIES:
+     :DURATION:   10d
+     :BLOCKER:  previous-sibling
+     :allocate: none
+     :END:
+**** TODO Release
+     :PROPERTIES:
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :END:
+          
+*** TODO raytracing Python API
+    :PROPERTIES:
+    :ALLOCATE: shervin
+    :BLOCKER:  previous-sibling
+    :END: 
+**** TODO Implementation
+     :PROPERTIES:
+     :DEPENDS:  openpmd_ray_ext_review, openpmd_ray_cpp_api
+     :EFFORT:   20d
+     :BLOCKER:
+     :ALLOCATE: shervin
+     :END:
+**** TODO Internal Review Implementation
+     :PROPERTIES:
+     :ALLOCATE: reviewers
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :DURATION: 2d
+     :END:
+**** TODO Documentation
+     :PROPERTIES:
+     :EFFORT:   2d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+**** TODO Tests
+     :PROPERTIES:
+     :EFFORT:   5d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+**** TODO CI   
+     :PROPERTIES:
+     :EFFORT:   2d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+**** Contingency
+     :PROPERTIES:
+     :DURATION:   10d
+     :BLOCKER:  previous-sibling
+     :allocate: none
+     :END:
+**** TODO Release
+     :PROPERTIES:
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :END:
+** PyVinyl
+   :PROPERTIES:
+   :ALLOCATE: jun
+   :END:  
+*** DONE Integration new Parameter class        
+    :PROPERTIES:
+    :ALLOCATE: jun
+    :ORDERED:  t
+    :BLOCKER:  previous-sibling
+    :EFFORT:   2d
+    :END: 
+*** DONE Integration Instrument class
+    :PROPERTIES:
+    :ALLOCATE: jun
+    :ORDERED:  t
+    :BLOCKER:  previous-sibling
+    :EFFORT:   2d
+    :END: 
+*** TODO Instrument database API (load, diff)
+    :PROPERTIES:
+    :ALLOCATE: jun
+    :EFFORT:   10d
+    :ORDERED:  t
+    :BLOCKER:  previous-sibling
+    :END: 
+*** TODO New release of libPyVinyl
+    :PROPERTIES:
+    :ALLOCATE: jun
+    :ORDERED:  t
+    :BLOCKER:  previous-sibling
+    :EFFORT:   2d
+    :ID:       libpyvinyl_2
+    :END: 
+*** TODO McStasScript using libPyVinyl
+    :PROPERTIES:
+    :ALLOCATE: mads
+    :ORDERED:
+    :BLOCKER:
+    :EFFORT:   20d
+    :DEPENDS:  libpyvinyl_2
+    :ID:       mcstas_libpyvinyl
+    :END: 
+          
+*** TODO SimEx-lite using libPyVinyl
+    :PROPERTIES:
+    :EFFORT:   30d
+    :ALLOCATE: jun
+    :DEPENDS:  libpyvinyl_2
+    :ID:       simex_libpyvinyl
+    :END: 
+** Instrument database
+   :PROPERTIES:
+   :ID:       instrument_db
+   :END:
+*** TODO SimEx example with parameters
+    :PROPERTIES:
+    :EFFORT:   5d
+    :ALLOCATE: jun
+    :DEPENDS:  simex_libpyvinyl
+    :ID:       simex_example
+    :END:
+*** TODO Automatic tests
+    :PROPERTIES:
+    :EFFORT:   10d
+    :ALLOCATE: shervin
+    :DEPENDS: simex_example
+    :END:
+*** TODO McStas example for D22 with parameters
+    :PROPERTIES:
+    :ALLOCATE: shervin
+    :EFFORT:   10d
+    :DEPENDS:  mcstas_libpyvinyl
+    :END: 
+*** TODO McStas example for Thales with parameters
+    :PROPERTIES:
+    :ALLOCATE: shervin
+    :EFFORT:   10d
+    :DEPENDS:  mcstas_libpyvinyl
+    :END:
+
+** Simex  
+** Simulation database
+*** Alpha test
+*** Beta test
+*** Deployment
+** Milestones
+*** Alpha Releases
+    :PROPERTIES:
+    :ID:  alpha_releases
+    :END:
+
+**** libPyVinyl
+    :PROPERTIES:
+    :ALLOCATE: jun
+    :DEPENDS:       libpyvinyl_2
+    :END: 
+**** McStasScript
+    :PROPERTIES:
+    :ALLOCATE: mads
+    :DEPENDS:  mcstas_libpyvinyl
+    :END: 
+**** SimEx-lite
+    :PROPERTIES:
+    :ALLOCATE: jun
+    :DEPENDS: simex_libpyvinyl
+    :END: 
+**** Instrument repository
+    :PROPERTIES:
+    :ALLOCATE: shervin
+    :DEPENDS:  instrument_db
+    :END:
+*** Beta Releases
+    :PROPERTIES:
+    :ALLOCATE: shervin
+    :DEPENDS:  alpha_releases
+    :END:
+
+**** libPyVinyl
+    :PROPERTIES:
+    :ALLOCATE: jun
+    :END: 
+**** McStasScript
+    :PROPERTIES:
+    :ALLOCATE: mads
+    :END: 
+**** SimEx-lite    
+     :PROPERTIES:
+     :ALLOCATE: jun
+     :END:
+**** Instrument repository
+    :PROPERTIES:
+    :ALLOCATE: shervin
+    :DEPENDS:  instrument_db
+    :END:
+
+

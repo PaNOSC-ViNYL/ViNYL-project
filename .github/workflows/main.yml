@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ orgmode_test ]
+  pull_request:
+    branches: [ orgmode_test ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install emacs and taskjuggler
+        run: sudo apt-get install emacs-nox rubygems-integration; sudo gem install taskjuggler
+
+      - name: convert from org to taskjuggler
+        run: emacs tasks.org  -L .emacs/ -l init --batch -f "org-taskjuggler-export"
+      - name: tjp to html
+        run: mkdir _site; tj3 -o _site tasks.tjp
+      - name: Deploy to GitHub Pages
+        uses: Cecilapp/GitHub-Pages-deploy@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          email: nourbakhsh@ill.fr
+          build_dir: _site

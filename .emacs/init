@@ -1,0 +1,59 @@
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-export-backends (quote (taskjuggler)))
+ '(package-selected-packages
+   (quote
+    (tj3-mode org-chef )))
+)
+
+
+(require 'ox-taskjuggler)
+
+(setq org-taskjuggler-default-reports
+'("textreport report \"index\" {
+formats html
+header '== %title =='
+center -8<-
+[#Plan Plan] | [#Resource_Allocation Resource Allocation]
+----
+=== Plan ===
+<[report id=\"plan\"]>
+----
+=== Resource Allocation ===
+<[report id=\"resourceGraph\"]>
+->8-
+}
+# A traditional Gantt chart with a project overview.
+taskreport plan \"\" {
+headline \"Project Plan\"
+columns bsi, name, start, end, effort,  chart { width 1500 }
+loadunit shortauto
+hideresource 1
+}
+# A graph showing resource allocation. It identifies whether each
+# resource is under- or over-allocated for.
+resourcereport resourceGraph \"\" {
+headline \"Resource Allocation Graph\"
+columns no, bsi, name,  weekly { width 1000 }
+loadunit shortauto
+hidetask ~(isleaf() & isleaf_())
+sorttasks plan.start.up
+}")
+)
+
+(setq org-taskjuggler-default-project-duration 999)
+(setq org-taskjuggler-valid-task-attributes
+'(account  note duration endbuffer endcredit end
+flags journalentry length limits maxend maxstart minend
+minstart period reference responsible scheduling
+startbuffer startcredit statusnote chargeset charge booking))
+
+					;(add-to-list 'load-path (concat user-emacs-directory "lisp/elgantt/")) ;; Or wherever it is located
+;(require 'elgantt)
+(provide '.emacs)
+
+;;; .emacs ends here
