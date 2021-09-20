@@ -1,4 +1,3 @@
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -30,7 +29,7 @@ center -8<-
 # A traditional Gantt chart with a project overview.
 taskreport plan \"\" {
 headline \"Project Plan\"
-columns bsi, name, start, end, effort,  chart { width 1500 }
+columns bsi, name, start, end, effort, effortdone, effortleft, chart { width 1500 }
 loadunit shortauto
 hideresource 1
 }
@@ -55,7 +54,9 @@ flags journalentry length limits maxend maxstart minend
 minstart period reference responsible scheduling
 startbuffer startcredit statusnote chargeset charge booking))
 
-					;(add-to-list 'load-path (concat user-emacs-directory "lisp/elgantt/")) ;; Or wherever it is located
+
+
+;(add-to-list 'load-path (concat user-emacs-directory "lisp/elgantt/")) ;; Or wherever it is located
 ;(require 'elgantt)
 (provide '.emacs)
 

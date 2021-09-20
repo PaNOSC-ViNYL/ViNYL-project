@@ -1,9 +1,13 @@
+# to compile in local
+# ls tasks.org | entr emacs tasks.org  -L .emacs/ -l init --batch -f "org-taskjuggler-export"
+# ls tasks.tjp | entr  tj3 -o /dev/shm/taskjuggler/ tasks.tjp
+
 #+PROPERTY: Effort_ALL 2d 5d 10d 20d 30d 35d 50d
 #+PROPERTY: Duration_ALL 2d 5d 10d 20d 30d 35d 50d
 #+PROPERTY: Allocate_ALL alijosa shervin mads carsten jun mousumi reviewers
 #+PROPERTY: ORDERED_ALL  t 
 #+PROPERTY: BLOCKER_ALL previous-sibling
-#+COLUMNS: %70ITEM(Task) %3EFFORT(Effort) %3DURATION(Duration) %10allocate(Allocate) %id %20depends %1ORDERED(ORDERED) %BLOCKER(BLOCKER) %SCHEDULED(start_date) %DEADLINE
+#+COLUMNS: %70ITEM(Task) %3EFFORT(Effort) %3LENGTH(Duration) %10allocate(Allocate) %id %20depends %1ORDERED(ORDERED) %BLOCKER(BLOCKER) %SCHEDULED(start_date) %DEADLINE
 #+STARTUP: CONTENT
 
 * Resources                                            :taskjuggler_resource:
@@ -23,11 +27,12 @@
 *** Jun 
     :PROPERTIES:
     :resource_id: jun
+    :vacation: 2021-09-20 - 2021-09-27
     :END:
 *** Shervin
     :PROPERTIES:
     :resource_id: shervin
-    :vacation:  2021-10-23 - 2021-11-07, 2021-12-18 - 2022-01-02
+    :vacation:  2021-10-23 - 2021-11-08, 2021-12-18 - 2022-01-03
     :END:
 *** Alijosa
     :PROPERTIES:
@@ -45,17 +50,21 @@
 
 
 
+
+
 * PANOSC WP5 :taskjuggler_project:
-  SCHEDULED: <2021-09-18 Sat> DEADLINE: <2022-11-30 Wed>
+  SCHEDULED: <2021-09-20 Mon> DEADLINE: <2022-11-30 Wed>
   :PROPERTIES:
   :DEPENDS_ALL: mcstas_libpyvinyl
   :trackingscenario: plan
+  :NOW: [2021-10-22 Fri]
   :END:
 ** TODO Protocol comparison sim vs data and sim vs sim
    DEADLINE: <2021-09-30 Thu>
    :PROPERTIES:
-   :DURATION:   5d
+   :LENGTH:   5d
    :ALLOCATE: shervin,carsten,mads,jun,mousumi,alijosa
+   :ID:       protocol
    :END:
 
 ** TODO OpenPMD
@@ -75,7 +84,7 @@
      :PROPERTIES:
      :ALLOCATE: shervin, mads, carsten
      :ID:       openpmd_ray_ext_review
-     :DURATION:   2d
+     :LENGTH:   2d
      :ORDERED:  t
      :END:
 **** TODO Submission and follow up till integration
@@ -90,19 +99,23 @@
     :id:       openpmd_ray_cpp_api
     :ALLOCATE: shervin
     :END:
-**** DONE Implementation
+**** DONE [#A] Implementation
      :PROPERTIES:
      :DEPENDS:  openpmd_ray_ext_review
      :EFFORT:   5d
      :effortdone: 5d
      :ALLOCATE: shervin
      :END:
-**** TODO Internal Review Implementation
+**** DONE [#A] Internal Review Implementation
      :PROPERTIES:
      :ALLOCATE: reviewers
      :ORDERED:  t
      :BLOCKER:  previous-sibling
-     :DURATION: 2d
+     :LENGTH: 2d
+     :ID:       openpmd_ray_cpp_api_review
+     :END:
+     :LOGBOOK:
+     CLOCK: [2021-09-20 Mon 11:31]--[2021-09-20 Mon 13:31] =>  2:00
      :END:
 **** TODO Documentation
      :PROPERTIES:
@@ -125,9 +138,17 @@
      :BLOCKER:  previous-sibling
      :ALLOCATE: shervin
      :END:
+**** [#A] Remaining issues [0/1]
+     :PROPERTIES:
+     :EFFORT:   2d
+     :ALLOCATE: shervin
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :END:
+     - [ ] [[https://github.com/PaNOSC-ViNYL/openPMD_raytrace_API/issues/2][Issue]] reported by Mads about maximum number of foreseen rays should not just throw an error but allow saving a new file or a new iteration in the same file
 **** Contingency
      :PROPERTIES:
-     :DURATION:   10d
+     :LENGTH:   10d
      :BLOCKER:  previous-sibling
      :allocate: none
      :END:
@@ -140,19 +161,19 @@
 *** TODO McStas openPMD I/O component    
     :PROPERTIES:
     :ALLOCATE: shervin
-    :BLOCKER:  previous-sibling
     :END: 
-**** TODO Implementation
+**** TODO [#A] Implementation
      :PROPERTIES:
      :EFFORT:   5d
      :ALLOCATE: shervin
+     :DEPENDS:  openpmd_ray_cpp_api_review
      :END:
-**** TODO Internal Review Implementation
+**** TODO [#A] Internal Review Implementation
      :PROPERTIES:
      :ALLOCATE: reviewers
      :ORDERED:  t
      :BLOCKER:  previous-sibling
-     :DURATION: 2d
+     :LENGTH: 2d
      :END:
 **** TODO Documentation
      :PROPERTIES:
@@ -177,7 +198,7 @@
      :END:
 **** Contingency
      :PROPERTIES:
-     :DURATION:   10d
+     :LENGTH:   10d
      :BLOCKER:  previous-sibling
      :allocate: none
      :END:
@@ -204,7 +225,7 @@
      :ALLOCATE: reviewers
      :ORDERED:  t
      :BLOCKER:  previous-sibling
-     :DURATION: 2d
+     :LENGTH: 2d
      :END:
 **** TODO Documentation
      :PROPERTIES:
@@ -229,7 +250,7 @@
      :END:
 **** Contingency
      :PROPERTIES:
-     :DURATION:   10d
+     :LENGTH:   10d
      :BLOCKER:  previous-sibling
      :allocate: none
      :END:
@@ -372,5 +393,6 @@
     :ALLOCATE: shervin
     :DEPENDS:  instrument_db
     :END:
+
 
 

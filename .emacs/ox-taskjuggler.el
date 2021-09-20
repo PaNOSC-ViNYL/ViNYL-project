@@ -149,6 +149,15 @@
 
 (require 'ox)
 
+;;; Added by Shervin from org.el version 9.5-dev
+(defun org-timestamp-from-string (s)
+  "Convert Org timestamp S, as a string, into a timestamp object.
+Return nil if S is not a valid timestamp string."
+  (when (org-string-nw-p s)
+    (with-temp-buffer
+      (save-excursion (insert s))
+      (org-element-timestamp-parser))))
+
 
 
 ;;; User Variables
@@ -318,7 +327,7 @@ like note or journalentry have to be on a single line."
   dailyworkinghours extend includejournalentry  numberformat
   outputdir scenario shorttimeformat timeformat trackingscenario
   weekstartsmonday weekstartssunday workinghours
-  yearlyworkingdays)
+  yearlyworkingdays include)
   "Valid attributes for Taskjuggler project.
 If one of these appears as a property for a headline that is a
 project definition, it will be exported with the corresponding
@@ -490,13 +499,26 @@ doesn't have any end date defined."
     (and deadline (org-timestamp-format deadline "%Y-%02m-%02d"))))
 
 (defun org-taskjuggler-get-date (item datestring)
-  "Return date field with name datestring in Y-m-d format for task or resource ITEM."
-  (let ((thisdate (org-element-property
+  "Return date field with name DATESTRING in Y-m-d format for task or resource ITEM."
+  (let ((thisdated (org-element-property
                    (intern (upcase (format ":%s" datestring)))
 		   item)))
-    (and thisdate (org-timestamp-format thisdate "%Y-%02m-%02d"))
+    (and thisdated (org-timestamp-format thisdated "%m-%02d"))
+    ;(and thisdated (format "%s" thisdated))
     )
   )
+
+(defun org-taskjuggler-get-now (item)
+  "Return now date for task or resource ITEM.
+ITEM is a headline.  Return value is a string or nil if ITEM
+doesn't have any now date defined."
+  (let ((deadline (org-timestamp-from-string (org-element-property :NOW item))))
+    (
+     format "%s" deadline
+     ;(and deadline (org-timestamp-format deadline "%s"))
+     )
+     ;))); ;(org-timestamp-format deadline ""))))
+))
 
 ;;; Internal Functions
 
@@ -753,8 +775,9 @@ days from now."
 		 (format "+%sd"
 			 org-taskjuggler-default-project-duration))))
    ;; Add attributes.
-   (let ((now (org-taskjuggler-get-date project "now")))
-     (and now (format "now %s\n" (format-time-string "%Y-%m-%d"))))
+;   (let ((now (org-taskjuggler-get-now project )))
+;     (and now (format "  now %s\n" now)) ;(format-time-string "%Y-%m-%d" now)))
+;     )
    (org-taskjuggler--indent-string
     (org-taskjuggler--build-attributes
      project org-taskjuggler-valid-project-attributes))
