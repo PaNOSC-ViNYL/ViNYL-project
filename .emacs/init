@@ -46,6 +46,9 @@ sorttasks plan.start.up
 )
 
 (setq org-taskjuggler-default-project-duration 999)
+(setq org-priority-highest 1)
+(setq org-priority-lowest 10)
+(setq org-priority-default 5)
 (setq org-taskjuggler-valid-task-attributes
 '(account  note duration endbuffer endcredit end
 flags journalentry length limits maxend maxstart minend
