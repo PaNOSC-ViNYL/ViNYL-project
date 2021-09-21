@@ -853,6 +853,7 @@ a unique id will be associated to it."
           (if (eq (org-element-property :todo-type task) 'done) "100"
             (org-element-property :COMPLETE task)))
          (depends (org-taskjuggler-resolve-dependencies task info))
+	 (closed (org-taskjuggler-get-closed task))
          (effort (let ((property
 			(intern (concat ":" (upcase org-effort-property)))))
 		   (org-element-property property task)))

@@ -8,9 +8,9 @@
 #+PROPERTY: Duration_ALL 2d 5d 10d 20d 30d 35d 50d
 #+PROPERTY: Allocate_ALL alijosa shervin mads carsten jun mousumi reviewers
 #+PROPERTY: ORDERED_ALL  t 
-#+PROPERTY: BLOCKER_ALL previous-sibling
 #+COLUMNS: %70ITEM(Task) %3EFFORT(Effort) %3LENGTH(Duration) %10allocate(Allocate) %id %20depends %1ORDERED(ORDERED) %BLOCKER(BLOCKER) %SCHEDULED(start_date) %DEADLINE
 #+STARTUP: CONTENT
+
 
 * Resources                                            :taskjuggler_resource:
 ** Review
@@ -57,24 +57,37 @@
 # scheduled tasks are meant as when they started
 # deadlines are interpreted as maxend date expected
 
+
 * PANOSC WP5 :taskjuggler_project:
-  SCHEDULED: <2021-09-20 Mon> DEADLINE: <2022-11-30 Wed>
+  SCHEDULED: <2021-09-17 Fri> DEADLINE: <2022-11-30 Wed>
   :PROPERTIES:
   :DEPENDS_ALL: mcstas_libpyvinyl
   :trackingscenario: plan
-  :NOW: [2021-09-20 Mon]
+  :NOW: [2021-09-21 Tue]
   :END:
-** TODO Protocol comparison sim vs data and sim vs sim
+** TODO [#B] Protocol comparison sim vs data and sim vs sim
    SCHEDULED: <2021-09-20 Mon> DEADLINE: <2021-09-30 Thu>
    :PROPERTIES:
-   :EFFORT:   5d
-   :ALLOCATE: shervin,carsten
    :ID:       protocol
    :END:
+*** TODO [#A] Adding section about simulation vs simulation comparison
+    SCHEDULED: <2021-09-22 Wed>
+    :PROPERTIES:
+    :EFFORT: 2d
+    :ALLOCATE: shervin
+    :ID: protocol_sim_vs_sim
+    :END:
+*** TODO [#A] Review and fixes
+    :PROPERTIES:
+    :EFFORT: 2d
+    :ALLOCATE: carsten
+    :ID: protocol_review
+    :BLOCKER: previous-sibling
+    :END:
 ** TODO OpenPMD
    :PROPERTIES:
    :END:
-*** TODO raytracing extension
+*** TODO [#B] raytracing extension
     :PROPERTIES:
     :id:       openpmd_ray_ext
     :ORDERED:  t
@@ -104,23 +117,29 @@
     :id:       openpmd_ray_cpp_api
     :ALLOCATE: shervin
     :END:
-**** TODO [#A] Implementation
+**** DONE Implementation
+     SCHEDULED: <2021-09-17 Fri> CLOSED: [2021-09-19 Sun]
      :PROPERTIES:
-     :EFFORT:   5d
+     :EFFORT:   4d
      :ALLOCATE: shervin
      :END:
      :LOGBOOK:
+     - CLOSING NOTE [2021-09-21 Tue 13:24] \\
+       Basic implementation finished
      - CLOSING NOTE [2021-09-21 Tue 11:17]
      :END:
-**** TODO [#A] Internal Review Implementation
+**** DONE Internal Review Implementation
+     CLOSED: [2021-09-21 Tue] SCHEDULED: <2021-09-20 Mon>
      :PROPERTIES:
      :ALLOCATE: reviewers
      :ORDERED:  t
      :BLOCKER:  previous-sibling
-     :LENGTH: 2d
+     :EFFORT: 2d
      :ID:       openpmd_ray_cpp_api_review
      :END:
      :LOGBOOK:
+     - CLOSING NOTE [2021-09-21 Tue 13:24] \\
+       Review performed by Mads
      CLOCK: [2021-09-20 Mon 11:31]--[2021-09-20 Mon 13:31] =>  2:00
      :END:
 **** TODO Documentation
@@ -144,7 +163,7 @@
      :BLOCKER:  previous-sibling
      :ALLOCATE: shervin
      :END:
-**** [#A] Remaining issues [0/1]
+**** Remaining issues [0/1]
      :PROPERTIES:
      :EFFORT:   2d
      :ALLOCATE: shervin
@@ -168,13 +187,13 @@
     :PROPERTIES:
     :ALLOCATE: shervin
     :END: 
-**** TODO [#A] Implementation
+**** TODO Implementation
      :PROPERTIES:
      :EFFORT:   5d
      :ALLOCATE: shervin
-     :DEPENDS:  openpmd_ray_cpp_api_review
+     :BLOCKER:  openpmd_ray_cpp_api_review
      :END:
-**** TODO [#A] Internal Review Implementation
+**** TODO Internal Review Implementation
      :PROPERTIES:
      :ALLOCATE: reviewers
      :ORDERED:  t
@@ -402,3 +421,4 @@
 
 
 
+    
