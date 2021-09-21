@@ -284,17 +284,22 @@
      :ORDERED:  t
      :BLOCKER:  previous-sibling
      :END:
-** PyVinyl
+** TODO PyVinyl
    :PROPERTIES:
    :ALLOCATE: jun
    :END:  
-*** TODO Integration new Parameter class        
+*** DONE Integration new Parameter class        
+    CLOSED: [2021-09-21 Tue]
     :PROPERTIES:
     :ALLOCATE: jun
     :ORDERED:  t
     :BLOCKER:  previous-sibling
     :EFFORT:   2d
     :END: 
+    :LOGBOOK:
+    - CLOSING NOTE [2021-09-21 Tue 16:19] \\
+      PR17 merged on the 2021-09-08
+    :END:
 *** TODO Integration Instrument class
     :PROPERTIES:
     :ALLOCATE: jun
@@ -302,13 +307,15 @@
     :BLOCKER:  previous-sibling
     :EFFORT:   2d
     :END: 
-*** TODO Instrument database API (load, diff)
+*** TODO Instrument database API (load, diff) [0/2]
     :PROPERTIES:
     :ALLOCATE: jun
     :EFFORT:   10d
     :ORDERED:  t
     :BLOCKER:  previous-sibling
     :END: 
+    - [ ] Method to make the diff of current instrument and that saved in the repo
+    - [ ] ? Method to make the diff of the parameters
 *** TODO New release of libPyVinyl
     :PROPERTIES:
     :ALLOCATE: jun
