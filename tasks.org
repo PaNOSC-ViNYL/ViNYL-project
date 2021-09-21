@@ -1,8 +1,10 @@
+#+STARTUP: lognotedone
+#+STARTUP: org-log-done-with-time
 # to compile in local
 # ls tasks.org | entr emacs tasks.org  -L .emacs/ -l init --batch -f "org-taskjuggler-export"
 # ls tasks.tjp | entr  tj3 -o /dev/shm/taskjuggler/ tasks.tjp
 
-#+PROPERTY: Effort_ALL 2d 5d 10d 20d 30d 35d 50d
+#+PROPERTY: Effort_ALL 1d 2d 3d 4d 5d 10d 20d 30d 35d 50d
 #+PROPERTY: Duration_ALL 2d 5d 10d 20d 30d 35d 50d
 #+PROPERTY: Allocate_ALL alijosa shervin mads carsten jun mousumi reviewers
 #+PROPERTY: ORDERED_ALL  t 
@@ -52,21 +54,23 @@
 
 
 
+# scheduled tasks are meant as when they started
+# deadlines are interpreted as maxend date expected
+
 * PANOSC WP5 :taskjuggler_project:
   SCHEDULED: <2021-09-20 Mon> DEADLINE: <2022-11-30 Wed>
   :PROPERTIES:
   :DEPENDS_ALL: mcstas_libpyvinyl
   :trackingscenario: plan
-  :NOW: [2021-10-22 Fri]
+  :NOW: [2021-09-20 Mon]
   :END:
 ** TODO Protocol comparison sim vs data and sim vs sim
-   DEADLINE: <2021-09-30 Thu>
+   SCHEDULED: <2021-09-20 Mon> DEADLINE: <2021-09-30 Thu>
    :PROPERTIES:
-   :LENGTH:   5d
-   :ALLOCATE: shervin,carsten,mads,jun,mousumi,alijosa
+   :EFFORT:   5d
+   :ALLOCATE: shervin,carsten
    :ID:       protocol
    :END:
-
 ** TODO OpenPMD
    :PROPERTIES:
    :END:
@@ -76,6 +80,7 @@
     :ORDERED:  t
     :END:
 **** TODO Prepare PR to openPMD standard
+     SCHEDULED: <2021-09-27 Mon>
      :PROPERTIES:
      :EFFORT:   5d
      :ALLOCATE: alijosa
@@ -99,14 +104,15 @@
     :id:       openpmd_ray_cpp_api
     :ALLOCATE: shervin
     :END:
-**** DONE [#A] Implementation
+**** TODO [#A] Implementation
      :PROPERTIES:
-     :DEPENDS:  openpmd_ray_ext_review
      :EFFORT:   5d
-     :effortdone: 5d
      :ALLOCATE: shervin
      :END:
-**** DONE [#A] Internal Review Implementation
+     :LOGBOOK:
+     - CLOSING NOTE [2021-09-21 Tue 11:17]
+     :END:
+**** TODO [#A] Internal Review Implementation
      :PROPERTIES:
      :ALLOCATE: reviewers
      :ORDERED:  t
@@ -143,7 +149,7 @@
      :EFFORT:   2d
      :ALLOCATE: shervin
      :ORDERED:  t
-     :BLOCKER:  previous-sibling
+     :BLOCKER:  previous-sibling, openpmd_ray_ext_review
      :END:
      - [ ] [[https://github.com/PaNOSC-ViNYL/openPMD_raytrace_API/issues/2][Issue]] reported by Mads about maximum number of foreseen rays should not just throw an error but allow saving a new file or a new iteration in the same file
 **** Contingency
@@ -263,14 +269,14 @@
    :PROPERTIES:
    :ALLOCATE: jun
    :END:  
-*** DONE Integration new Parameter class        
+*** TODO Integration new Parameter class        
     :PROPERTIES:
     :ALLOCATE: jun
     :ORDERED:  t
     :BLOCKER:  previous-sibling
     :EFFORT:   2d
     :END: 
-*** DONE Integration Instrument class
+*** TODO Integration Instrument class
     :PROPERTIES:
     :ALLOCATE: jun
     :ORDERED:  t
@@ -339,8 +345,8 @@
     :DEPENDS:  mcstas_libpyvinyl
     :END:
 
-** Simex  
 ** Simulation database
+   SCHEDULED: <2022-01-03 Mon>
 *** Alpha test
 *** Beta test
 *** Deployment

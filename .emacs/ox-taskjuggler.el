@@ -498,27 +498,24 @@ doesn't have any end date defined."
   (let ((deadline (org-element-property :deadline item)))
     (and deadline (org-timestamp-format deadline "%Y-%02m-%02d"))))
 
+
+(defun org-taskjuggler-get-closed (item)
+  "Return end date for task or resource ITEM.
+ITEM is a headline.  Return value is a string or nil if ITEM
+doesn't have any end date defined."
+  (let ((deadline (org-element-property :closed item)))
+    (and deadline (org-timestamp-format deadline "%Y-%02m-%02d"))))
+
 (defun org-taskjuggler-get-date (item datestring)
   "Return date field with name DATESTRING in Y-m-d format for task or resource ITEM."
-  (let ((thisdated (org-element-property
-                   (intern (upcase (format ":%s" datestring)))
-		   item)))
-    (and thisdated (org-timestamp-format thisdated "%m-%02d"))
-    ;(and thisdated (format "%s" thisdated))
+  (let ((thisdated (org-timestamp-from-string
+		    (org-element-property
+                     (intern (upcase (format ":%s" datestring)))
+		     item))))
+    (and thisdated (org-timestamp-format thisdated "%Y-%02m-%02d"))
     )
   )
 
-(defun org-taskjuggler-get-now (item)
-  "Return now date for task or resource ITEM.
-ITEM is a headline.  Return value is a string or nil if ITEM
-doesn't have any now date defined."
-  (let ((deadline (org-timestamp-from-string (org-element-property :NOW item))))
-    (
-     format "%s" deadline
-     ;(and deadline (org-timestamp-format deadline "%s"))
-     )
-     ;))); ;(org-timestamp-format deadline ""))))
-))
 
 ;;; Internal Functions
 
@@ -775,9 +772,9 @@ days from now."
 		 (format "+%sd"
 			 org-taskjuggler-default-project-duration))))
    ;; Add attributes.
-;   (let ((now (org-taskjuggler-get-now project )))
-;     (and now (format "  now %s\n" now)) ;(format-time-string "%Y-%m-%d" now)))
-;     )
+   (let ((now (org-taskjuggler-get-date project "NOW")))
+     (and now (format "  now %s\n" now))
+     )
    (org-taskjuggler--indent-string
     (org-taskjuggler--build-attributes
      project org-taskjuggler-valid-project-attributes))
@@ -861,6 +858,7 @@ a unique id will be associated to it."
 		   (org-element-property property task)))
 	 (start (org-taskjuggler-get-start task))
 	 (end   (org-taskjuggler-get-end task))
+	 (closed (org-taskjuggler-get-closed task))
          (milestone
           (or (org-element-property :MILESTONE task)
               (not (or (org-element-map (org-element-contents task) 'headline
@@ -893,9 +891,11 @@ a unique id will be associated to it."
                     "allocations")
                   allocate))
      (and complete (format "  complete %s\n" complete))
-     (and effort (format "  effort %s\n" effort))
+     (and effort (not closed) (not complete) (format "  effort %s\n" effort))
      (and priority (format "  priority %s\n" priority))
      (and milestone "  milestone\n")
+     (and end (format "  maxend %s\n" end))
+     (and closed (format "  end %s\n" closed))
      ;; Add other valid attributes.
      ;(and (org-taskjuggler-get-start task) (format-time-string "%Y-%m-%d" (org-taskjuggler-get-start task)))
      (org-taskjuggler--indent-string

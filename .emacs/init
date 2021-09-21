@@ -4,10 +4,19 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-export-backends (quote (taskjuggler)))
+ '(inhibit-startup-screen t)
+ '(org-log-done (quote note))
+ '(org-log-done-with-time nil)
+ '(org-log-into-drawer t)
+ '(org-log-redeadline (quote note))
+ '(org-log-refile (quote note))
+ '(org-log-repeat (quote note))
+ '(org-log-reschedule (quote note))
  '(package-selected-packages
    (quote
     (tj3-mode org-chef )))
 )
+
 
 
 (require 'ox-taskjuggler)
@@ -29,7 +38,7 @@ center -8<-
 # A traditional Gantt chart with a project overview.
 taskreport plan \"\" {
 headline \"Project Plan\"
-columns bsi, name, start, end, effort, effortdone, effortleft, chart { width 1500 }
+columns bsi, name, start, end, maxend {cellcolor plan.end > plan.maxend \"#FF0000\" }, effort,  effortleft, status, chart { width 1500 }
 loadunit shortauto
 hideresource 1
 }
@@ -50,11 +59,11 @@ sorttasks plan.start.up
 (setq org-priority-default 5)
 (setq org-taskjuggler-valid-task-attributes
 '(account  note duration endbuffer endcredit end
-flags journalentry length limits maxend maxstart minend
+flags journalentry length  maxend maxstart minend
 minstart period reference responsible scheduling
-startbuffer startcredit statusnote chargeset charge booking))
+startbuffer startcredit statusnote chargeset charge booking effortdone))
 
-
+(setq org-log-done-with-time nil)
 
 ;(add-to-list 'load-path (concat user-emacs-directory "lisp/elgantt/")) ;; Or wherever it is located
 ;(require 'elgantt)
