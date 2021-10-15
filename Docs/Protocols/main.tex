@@ -1,0 +1,208 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=3cm, right=3cm, head=2.5cm, top=3cm, bottom=3cm]{geometry}
+\usepackage{enumitem}
+\usepackage[parfill]{parskip} % this is just personal preference
+
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{colorlinks, urlcolor=blue! 50! black, linkcolor=blue! 50! black, citecolor=blue! 50! black}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{graphicx}
+\rhead{\includegraphics[height=1.5cm]{Flag_of_Europe}}
+\chead{\footnotesize\textit{This project has received funding from the EU FP 7 grant number \\ 283883, Horizon 2020 grant agreement No 654000 and Horizon \\ 2020 grant agreement No. 823852.}}
+\lhead{\includegraphics[height=1.5cm]{PaNOSC_cmyk_positivo}}
+
+\usepackage{biblatex}
+\addbibresource{biblio.bib}
+
+\usepackage[acronym]{glossaries}
+\input{acronym}
+
+\title{Protocol for comparison of raw simulated to raw experimental data}
+\author{Shervin Nourbakhsh, Juncheng E}
+\date{May 2021}
+
+
+\usepackage{xspace}
+\newcommand{\Ell}{\ensuremath{\mathcal{L}}\xspace}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\tableofcontents
+
+\section{Introduction}
+\label{sec:intro}
+
+The purpose of this document is to provide a guideline for comparing RAW
+simulated and real data for a general experiment at photon and neutron
+facilities. This guideline can also be applied to compare two
+simulations with small changes in their parameters.
+
+Given the large number of instruments, type of experiments, and relevant
+physical quantities that might matter, the following is based on a few
+basic assumptions and a minimal amount of quantities that might  be
+found in any scattering experiment.
+
+\section{Basic assumptions}
+\label{sec:assumptions}
+
+\begin{itemize}
+\item We have an accurate description of:
+  \begin{itemize}
+  \item the source and the beam line up to the sample,
+  \item the sample and the scattering,
+  \item the instrument with all the relevant parameters and the detector.
+  \end{itemize}
+\item In particular, we are aware of:
+  \begin{itemize}
+  \item background sources,
+  \item electronic noise,
+  \item detector resolution and efficiency.
+  \end{itemize}
+\end{itemize}
+The sources of error could be accounted for by adding them to the simulated
+sample post-facto.
+
+The comparison between measurement and simulation has to be performed on the measured quantities. 
+It is also very important that the output format of the real and simulated data be the same (ideally in Nexus format), such that the exact same analysis code can be used on both.
+In the following discussion we will concentrate on detected scattered rays (photons and
+neutrons) on a pixellated detector, thus providing ray counts on a
+plane represented by a 2D grid ($x$ and $y$ coordinates). Other measured
+quantities can be added to the comparison, e.g. time-of-flight or
+energy, but these won't be discussed in this document.
+
+
+\section{Global score for estimating agreement between data and
+simulation}
+\label{global-score-for-estimating-agreement-between-data-and-simulation}
+
+It is not unusual to compare different sets of simulated data, either from different simulation programs, or when changing some of the simulation parameters. In these cases it is necessary to define a way to quantify the agreement of data and simulation. 
+The suggested method implies the use of the likelihood function\cite{likelihood}.
+In a probabilistic view, we will assume the different simulation sets to be equally probable.
+In the following only the case of binned distributions will be treated, such as those obtained by the instrument detectors counting neutrons or photons with one bin per pixel.
+
+The probability of counting an event in the bin $i$ follows a Poisson distribution~\cite{poisson},
+\begin{equation}
+    f(k|\lambda) = \frac{\lambda^k e^{-\lambda}}{k!} 
+\end{equation}
+where $\lambda$ is the expected number of counts for a given bin obtained from the simulation, and $k$ is the effective number of counts as obtained from real data.
+More generally $\lambda$ depends on the set of parameters in the simulation, the simulation code itself, version, implementation, etc.: $\lambda = \lambda(\vec \theta)$. For convenience the explicit dependency on $\vec\theta$ will be omitted to ease the notation in the formulas, but it may reappear when relevant in the discussion.
+
+The different bins are treated as statistically independent experiments without loss of generality. 
+%(it can be shown that the correlation between bins goes into a normalization factor that is irrelevant in the following).
+The global likelihood \Ell is then simply the product of the likelihood of the single bins:
+\newcommand{\likelihood}{\ensuremath{\Ell_i(k_i|\lambda_i)}}
+\begin{equation}
+    \Ell = \prod_{i}{\likelihood}
+\end{equation}
+\marginpar{should I explain what the $|$ symbol means?}
+%where $\vec\theta$ is the set of all possible simulation parameters that $\lambda$ might depend on. 
+
+%The detailed
+%discussion about the mathematical treatment is beyond the goal of this
+%document, and hence only few basic references are provided. 
+
+Since the probability density function for a single bin is a Poisson distribution, the likelihood is defined as:
+\begin{equation}
+\Ell_i =    \likelihood = \frac{\lambda_i^{k_i} \cdot e^{-\lambda_i}}{k_i!}
+\end{equation}
+
+The simulation with the highest likelihood is the one that best matches the data. Hence optimizing simulation parameters for the best fit to the data is equivalent to maximizing the likelihood function. From a computing point of view, the problem is simplified by minimizing the negative logarithm of the likelihood (NLL):
+
+\begin{equation}
+ - 2\ln(\Ell) = -2\ln{\prod_i{\Ell_i}} = -2 \sum_i{\ln{\Ell_i}}
+    = -2\sum_i{(k_i \ln{\lambda_i} - \lambda_i - \ln{(k_i!)}) }
+    \end{equation}
+    
+When looking for the best match between data and simulation, the last term, $\ln{(k_i!)}$, can be neglected as it only represents a normalization factor and does not depend on the simulation.
+The equation can be further simplified as follows:
+\begin{equation}
+ - 2\ln(\Ell) =   -2\cdot \left( \sum_i{k_i \ln{\lambda_i}} - \sum_i{\lambda_i}   \right) =  -2\cdot \left( \sum_i{k_i \ln{\lambda_i}} - \Lambda \right)
+\end{equation}
+where $\Lambda$ is the total number of predicted counts in the simulation for the entire distribution. 
+
+$\Lambda$ might depend on some of the simulation parameters of interest, but it can also strongly depend on other factors in the simulation that are not generally well tuned. So unless one knows that the parameters of interest are one of its main dependencies, it is advisable to ignore it. 
+
+It is also good practice to normalize the distribution of the simulated data. The normalization factor, being a constant, does not play any role in the minimization of $-2\ln{\Ell}$.
+
+
+Please be aware that the number of simulated
+events should be at least 10 times larger than the data in order to be
+able to neglect the statistical uncertainties on the simulated sample.
+Pixels with zero or very low countings can lead to issues when
+estimating the likelihood, e.g. some protections should be put in place
+to avoid the case of zero counts in the simulation and non-zero counts
+in the data.
+
+\subsection{Step by step procedure :}\label{step-by-step-procedure}
+A more detailed step-by-step procedure for the comparison is given, considering one detector image for simulated data and one for real data.
+The image is a three-dimensional array, $(x,y,z)$, with $x$ and $y$ being the two axis of the image and $z$ being the number of counts in the given pixel.
+We define $S$ as the array of simulated data and $D$ the corresponding real data.
+\begin{enumerate}
+
+\item Scale $z_S$ to have the integral over the image equal to 1.
+\item For each bin calculate $\ln{\Ell_i} = k_i \cdot \ln{\lambda_i}$.
+\item Calculate $\text{NLL}(D|S(\vec\theta)) = -2 \cdot \sum_i \ln{\Ell_i}$.
+\item Changing the values of the parameters $\vec\theta$, one can evaluate the NLL and minimize it.
+\item Use a minimization algorithm to find the minimum of the NLL function.
+\end{enumerate}
+
+
+\paragraph{N.B}
+Nothing guarantees the NLL will behave well. It can have multiple local minima, or even be very ill shaped. Only scanning over all the possible values of the parameters can give a visual shape of the NLL function. It is up to the analyser to verify that the algorithm chosen to minimize the NLL function is really able to pick the absolute minimum.
+
+The global likelihood provides a way for a fast and ``automated''
+comparison, but it is strongly suggested to check single distributions
+and their parameters as described below in order to better
+catch the differences.
+
+\section{Relevant distributions:}\label{relevant-distributions}
+
+\begin{itemize}
+\item 2D heat map of number of rays per pixel on the x-y plane
+  \begin{itemize}
+  \item to visually check the x-y distribution of the rays
+  \end{itemize}
+\item 1D distribution of rays per bin along the x and y axes: while
+  projecting on the x axis, each bin in the histogram is summing all
+  rays falling in that x-bin regardless of the y coordinate
+\item total number of rays on the detector surface
+
+  \begin{itemize}
+  \item to check the flux
+  \end{itemize}
+\end{itemize}
+
+\section{Distribution parameters for 1D
+distributions:}\label{distribution-parameters-for-1d-distributions}
+
+Relevant measured quantities might be 1D or 2D or more, depending on the
+instrument and experiment. In order to ease the inspections, we
+recommend the following:
+
+\begin{itemize}
+\item For 2D distributions:
+
+  \begin{itemize}
+  \item heat map plot of the 2D distribution
+  \item 1D projections along the two axes
+  \end{itemize}
+\item For 1D distributions
+
+  \begin{itemize}
+  \item total number of counts (N)
+  \item standard deviation (sigma)
+  \item mean +/- sigma/sqrt(N)
+  \item skewness (asymmetry)\cite{skweness} and kurtosis\cite{kurtosis}
+  \end{itemize}
+\end{itemize}
+
+
+\printbibliography
+\end{document}
