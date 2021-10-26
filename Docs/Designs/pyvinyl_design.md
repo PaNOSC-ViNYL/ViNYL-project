@@ -37,3 +37,28 @@ my_instrument.remove_calculator(calculator1.name)
 # Dump the parameters into .json
 my_instrument.parameters.to_json('instr_parameters.json')
 ```
+
+# A print example of of an instrument.
+Parameters printed using `my_instrument.list_parameters()`
+
+```
+- ParametersCollection object -
+
+   calculator1
+    - Parameters object -
+   photon_energy  10   [eV]      Photon energy   
+   pulse_energy   0.001[joule]   Pulse energy   
+
+   calculator2
+    - Parameters object -
+   photon_energy  12   [eV]      Photon energy   
+   pulse_energy   0.002[joule]   Pulse energy  
+   
+   calculator3
+    - Parameters object -
+   photon_energy  15   [eV]      Photon energy   
+   pulse_energy   0.002[joule]   Pulse energy 
+```
+
+# An example of instument.json file
+[Example .json file](https://gist.github.com/JunCEEE/94189879c3593d6511c30c5f57cd151e)
