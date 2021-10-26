@@ -28,6 +28,11 @@ my_instrument.add_calculator(calculator1)
 my_instrument.add_calculator(calculator2)
 my_instrument.add_calculator(calculator3)
 
+# Set a photon_energy master parameter for calculator1 and calculator2
+links = {calculator1.name: 'photon_energy', calculator2.name: 'photon_energy'}
+my_instrument.add_master_parameter('photon_energy', links)
+my_instrument.master['photon_energy'] = 10
+
 # List all the calculators
 my_instrument.list_calculators()
 
