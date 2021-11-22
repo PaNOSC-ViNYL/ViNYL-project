@@ -503,6 +503,7 @@
 
 ** Simulation database
    SCHEDULED: <2022-01-03 Mon>
+    More details in [[https://githubPaNOSC-ViNYL/ViNYL-project#55]]
 *** Alpha test
 *** Beta test
 *** Deployment
@@ -532,6 +533,19 @@
     :ALLOCATE: shervin
     :DEPENDS:  instrument_db
     :END:
+**** Cloud deployment :must_have:
+We need to demonstrate how te deploy simulation services in the PaNOSC cloud services.
+As a minimal solution, we have to provide docker containers for SIMEX and McStas/McStasScript plus jupyter notebook that can then be launched from within VISA.
+Oasys is a different story, here the solution presented by Aljosa and Andrea is already sufficient.
+**** Material properties database connectors
+     In SIMEX, there is the option to retrieve sample definition files (in .pdb) format directly from the Protein Database. I would like to see (in SIMEX) a similar functionality for DFT simulation data or relaxed structures from the nomad DB.
+     - downloading raw DFT data from nomad given a DOI or upload_id or calc_id
+     - Additional but not strictly required features would be:
+       + authentication with the nomad service
+       + uploading a DFT dataset.
+
+This tool should make use of the nomad API https://nomad-lab.eu/prod/rae/api/
+
 *** Beta Releases
     :PROPERTIES:
     :ALLOCATE: shervin
