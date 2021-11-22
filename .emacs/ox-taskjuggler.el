@@ -848,7 +848,14 @@ All valid attributes from TASK are inserted.  If TASK defines
 a property \"task_id\" it will be used as the id for this task.
 Otherwise it will use the ID property.  If neither is defined
 a unique id will be associated to it."
-  (let* ((allocate (org-element-property :ALLOCATE task))
+  (let* (
+	 (allocate (let (
+			 (alloc (org-element-property :ALLOCATE task))
+			 (assignee (org-element-property :assignee task))
+			 )
+		     (if alloc alloc assignee)
+		     )
+		   )
          (complete
           (if (eq (org-element-property :todo-type task) 'done) "100"
             (org-element-property :COMPLETE task)))
@@ -861,7 +868,7 @@ a unique id will be associated to it."
 	 (end   (org-taskjuggler-get-end task))
 	 (closed (org-taskjuggler-get-closed task))
          (milestone
-          (or (org-element-property :MILESTONE task)
+          (or (> 1 2) ;(org-element-property :MILESTONE task)
               (not (or (org-element-map (org-element-contents task) 'headline
 			 'identity info t)  ; Has task any child?
 		       effort

@@ -26,7 +26,11 @@
 formats html
 header '== %title =='
 center -8<-
-[#Plan Plan] | [#Resource_Allocation Resource Allocation]
+[#Plan Plan] | [#Resource_Allocation Resource Allocation] | [#Task_sprint2021 Sprint 2021] | [#Resource_sprint2021 Sprint 2021]
+----
+=== Sprint2021 ===
+<[report id=\"Task_sprint2021\"]>
+<[report id=\"Resource_sprint2021\"]>
 ----
 === Plan ===
 <[report id=\"plan\"]>
@@ -34,6 +38,24 @@ center -8<-
 === Resource Allocation ===
 <[report id=\"resourceGraph\"]>
 ->8-
+}
+#
+taskreport Task_sprint2021 \"\" {
+headline \"Sprint2021 Plan\"
+hidetask ~sprint2021
+columns bsi, name, start, end, maxend {cellcolor plan.end > plan.maxend \"#FF0000\" }, effort { celltext plan.status = \"done\" \"DONE\"},  effortleft, status, chart { width 1500 scale day}
+loadunit shortauto
+hideresource 1
+start 2021-12-01
+end 2021-12-15
+}
+resourcereport Resource_sprint2021 \"\" {
+headline \"Resource Allocation Graph for Sprint2021\"
+columns no, bsi, name,  daily { width 1000 }
+loadunit shortauto
+hidetask ~(isleaf() & isleaf_() & sprint2021)
+sorttasks plan.start.up
+start 2021-12-01
 }
 # A traditional Gantt chart with a project overview.
 taskreport plan \"\" {
@@ -52,6 +74,11 @@ hidetask ~(isleaf() & isleaf_())
 sorttasks plan.start.up
 }")
 )
+
+	
+(setq org-taskjuggler-default-global-properties
+  "flags sprint2021"
+  )
 
 (setq org-taskjuggler-default-project-duration 999)
 (setq org-priority-highest 65)

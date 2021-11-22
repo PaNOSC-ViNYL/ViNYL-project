@@ -1,5 +1,6 @@
 #+STARTUP: lognotedone
 #+STARTUP: org-log-done-with-time
+#+TODO: TODO ONGOING REVIEW | DONE
 # to compile in local
 # ls tasks.org | entr emacs tasks.org  -L .emacs/ -l init --batch -f "org-taskjuggler-export"
 # ls tasks.tjp | entr  tj3 -o /dev/shm/taskjuggler/ tasks.tjp
@@ -8,8 +9,10 @@
 #+PROPERTY: Duration_ALL 2d 5d 10d 20d 30d 35d 50d
 #+PROPERTY: Allocate_ALL alijosa shervin mads carsten jun mousumi reviewers
 #+PROPERTY: ORDERED_ALL  t 
-#+COLUMNS: %70ITEM(Task) %3EFFORT(Effort) %3LENGTH(Duration) %10allocate(Allocate) %id %20depends %1ORDERED(ORDERED) %BLOCKER(BLOCKER) %SCHEDULED(start_date) %DEADLINE
+#+PROPERTY: FLAGS_ALL  sprint2021
+#+COLUMNS: %70ITEM(Task) %5GH_ID %FLAGS %3EFFORT(Effort) %3LENGTH(Duration) %10allocate(Allocate) %id %20depends %1ORDERED(ORDERED) %BLOCKER(BLOCKER) %SCHEDULED(start_date) %DEADLINE
 #+STARTUP: CONTENT
+
 
 
 * Resources                                            :taskjuggler_resource:
@@ -49,6 +52,10 @@
     :resource_id: carsten
     :limits:   {weeklymax 1d}
     :END:
+*** Manuel
+    :PROPERTIES:
+    :resource_id: srio
+    :END:
 
 
 
@@ -65,49 +72,104 @@
   :trackingscenario: plan
   :NOW: [2021-09-21 Tue]
   :END:
+
+** Papers   
+*** In-silico neutron diffraction from Boro-carbon systems
+    SCHEDULED: <2021-12-01 Wed>
+    :PROPERTIES:
+    :GH_ID:    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/72][72]]
+    :FLAGS:    sprint2021
+    :EFFORT:   10d
+    :ALLOCATE: mousumi
+    :END:
+** Oasys    
+*** TODO Docker image
+    SCHEDULED: <2021-12-01 Wed>
+    :PROPERTIES:
+    :GH_ID:    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/73][73]]
+    :FLAGS:    sprint2021
+    :EFFORT:   4d
+    :ALLOCATE: alijosa
+    :END:   
+** PAN-learning
+*** TODO [#C] Simex material
+    DEADLINE: <2021-12-15 Wed> SCHEDULED: <2021-12-01 Wed>
+    :PROPERTIES:
+    :GH_ID:    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/66][66]]
+    :FLAGS:    sprint2021
+    :ALLOCATE: jun
+    :EFFORT:   1d
+    :END:
+*** TODO [#C] Oasys schools material uploaded to PAN learning
+    SCHEDULED: <2021-12-01 Wed>
+    :PROPERTIES:
+    :GH_ID:    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/75][75]]
+    :FLAGS:    sprint2021
+    :EFFORT:   2d
+    :ALLOCATE: alijosa
+    :END:   
 ** TODO [#B] Protocol comparison sim vs data and sim vs sim
-   SCHEDULED: <2021-09-20 Mon> DEADLINE: <2021-09-30 Thu>
+   DEADLINE: <2021-12-15 Wed> SCHEDULED: <2021-12-01 Wed>
    :PROPERTIES:
    :ID:       protocol
+   :GH_ID:    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/64][64]]
+   :FLAGS:    sprint2021
    :END:
-*** TODO [#A] Adding section about simulation vs simulation comparison
+*** TODO [#A] Adding section about simulation vs simulation comparison :sprint2021:
     SCHEDULED: <2021-09-22 Wed>
     :PROPERTIES:
     :EFFORT: 2d
     :ALLOCATE: shervin
     :ID: protocol_sim_vs_sim
-    :END:
+    :FLAGS:    sprint2021
+    :END:   
 *** TODO [#A] Review and fixes
+    SCHEDULED: <2021-12-10 Fri>
     :PROPERTIES:
-    :EFFORT: 2d
+    :EFFORT:   1d
     :ALLOCATE: carsten
     :ID: protocol_review
     :BLOCKER: previous-sibling
+    :FLAGS:    sprint2021
     :END:
-** TODO OpenPMD
+    :LOGBOOK:
+    CLOCK: [2021-09-21 Tue 17:01]--[2021-09-21 Tue 17:16] =>  0:15
+    :END:
+** OpenPMD  
    :PROPERTIES:
-   :END:
-*** TODO [#B] raytracing extension
+   :END:    
+*** TODO [#C] raytracing extension
+     SCHEDULED: <2021-12-01 Wed>
     :PROPERTIES:
     :id:       openpmd_ray_ext
     :ORDERED:  t
-    :END:
-**** TODO Prepare PR to openPMD standard
-     SCHEDULED: <2021-09-27 Mon>
+    :ALLOCATE: alijosa
+    :END:   
+**** TODO [#A] Prepare PR to openPMD standard
+     DEADLINE: <2021-12-15 Wed> SCHEDULED: <2021-12-01 Wed>
      :PROPERTIES:
-     :EFFORT:   5d
+     :EFFORT:   2d
      :ALLOCATE: alijosa
-     :END:
+     :FLAGS:    sprint2021
+     :END:  
 **** TODO Interal review
      :PROPERTIES:
      :ALLOCATE: shervin, mads, carsten
      :ID:       openpmd_ray_ext_review
      :LENGTH:   2d
      :ORDERED:  t
-     :END:
-**** TODO Submission and follow up till integration
+     :FLAGS:    sprint2021
+     :END:  
+**** TODO Submission to openPMD
      :PROPERTIES:
-     :EFFORT:   5d
+     :EFFORT:   1d
+     :ALLOCATE: alijosa
+     :ORDERED:  t
+     :FLAGS:    sprint2021
+     :END:
+**** TODO follow up till integration
+     :PROPERTIES:
+     :DURATION: 20d
      :ALLOCATE: alijosa
      :ORDERED:  t
      :END:
@@ -128,7 +190,7 @@
        Basic implementation finished
      - CLOSING NOTE [2021-09-21 Tue 11:17]
      :END:
-**** DONE Internal Review Implementation
+**** DONE Implementation Review Mads
      CLOSED: [2021-09-21 Tue] SCHEDULED: <2021-09-20 Mon>
      :PROPERTIES:
      :ALLOCATE: reviewers
@@ -142,14 +204,26 @@
        Review performed by Mads
      CLOCK: [2021-09-20 Mon 11:31]--[2021-09-20 Mon 13:31] =>  2:00
      :END:
-**** TODO Documentation
+**** TODO Internal Review Implementation
+     SCHEDULED: <2021-12-09 Thu>
+     :PROPERTIES:
+     :ALLOCATE: reviewers
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :EFFORT: 2d
+     :ID:       openpmd_ray_cpp_api_review_2
+     :flags: sprint2021
+     :END:
+
+
+**** ONGOING Documentation
      :PROPERTIES:
      :EFFORT:   2d
      :ORDERED:  t
      :BLOCKER:  previous-sibling
      :ALLOCATE: shervin
      :END:
-**** TODO Tests
+**** ONGOING Tests
      :PROPERTIES:
      :EFFORT:   5d
      :ORDERED:  t
@@ -171,6 +245,7 @@
      :BLOCKER:  previous-sibling, openpmd_ray_ext_review
      :END:
      - [ ] [[https://github.com/PaNOSC-ViNYL/openPMD_raytrace_API/issues/2][Issue]] reported by Mads about maximum number of foreseen rays should not just throw an error but allow saving a new file or a new iteration in the same file
+     - [ ] CHUNK_SIZE should be optimized and set configurable at compile time
 **** Contingency
      :PROPERTIES:
      :LENGTH:   10d
@@ -187,29 +262,41 @@
     :PROPERTIES:
     :ALLOCATE: shervin
     :END: 
-**** TODO Implementation
+**** DONE Implementation
+     CLOSED: [2021-10-19 Tue]
      :PROPERTIES:
      :EFFORT:   5d
      :ALLOCATE: shervin
      :BLOCKER:  openpmd_ray_cpp_api_review
      :END:
+     :LOGBOOK:
+     - CLOSING NOTE [2021-10-19 Tue 15:26] \\
+       Basic implementation finished
+     :END:
+**** DONE Tests
+     CLOSED: [2021-10-19 Tue]
+     :PROPERTIES:
+     :EFFORT:   5d
+     :ORDERED:  t
+     :BLOCKER:  previous-sibling
+     :ALLOCATE: shervin
+     :END:
+     :LOGBOOK:
+     - CLOSING NOTE [2021-10-19 Tue 15:26] \\
+       Instrument read and write tests implemented
+     :END:
 **** TODO Internal Review Implementation
+     SCHEDULED: <2021-12-08 Wed>
      :PROPERTIES:
      :ALLOCATE: reviewers
      :ORDERED:  t
      :BLOCKER:  previous-sibling
      :LENGTH: 2d
+     :FLAGS:    sprint2021
      :END:
 **** TODO Documentation
      :PROPERTIES:
      :EFFORT:   2d
-     :ORDERED:  t
-     :BLOCKER:  previous-sibling
-     :ALLOCATE: shervin
-     :END:
-**** TODO Tests
-     :PROPERTIES:
-     :EFFORT:   5d
      :ORDERED:  t
      :BLOCKER:  previous-sibling
      :ALLOCATE: shervin
@@ -221,6 +308,12 @@
      :BLOCKER:  previous-sibling
      :ALLOCATE: shervin
      :END:
+**** TODO Remaining issues [0/2]
+     :PROPERTIES:
+     :EFFORT:   10d
+     :END:
+     - [ ] Implement MPI
+     - [ ] Performance comparison
 **** Contingency
      :PROPERTIES:
      :LENGTH:   10d
@@ -231,7 +324,7 @@
      :PROPERTIES:
      :ORDERED:  t
      :BLOCKER:  previous-sibling
-     :END:
+     :END:  
           
 *** TODO raytracing Python API
     :PROPERTIES:
@@ -284,7 +377,13 @@
      :ORDERED:  t
      :BLOCKER:  previous-sibling
      :END:
-** TODO PyVinyl
+*** TODO OpenPMD raytracing to numpy conversion for ML training 
+    SCHEDULED: <2021-11-29 Mon>
+    :PROPERTIES:
+    :EFFORT:   4d
+    :ALLOCATE: shervin
+    :END:
+** PyVinyl
    :PROPERTIES:
    :ALLOCATE: jun
    :END:  
@@ -300,23 +399,59 @@
     - CLOSING NOTE [2021-09-21 Tue 16:19] \\
       PR17 merged on the 2021-09-08
     :END:
-*** TODO Integration Instrument class
+*** DONE Integration Instrument class
+    CLOSED: [2021-10-19 Tue]
     :PROPERTIES:
     :ALLOCATE: jun
     :ORDERED:  t
     :BLOCKER:  previous-sibling
     :EFFORT:   2d
     :END: 
-*** TODO Instrument database API (load, diff) [0/2]
+    :LOGBOOK:
+    - CLOSING NOTE [2021-10-19 Tue 15:23] \\
+      [[https://github.com/PaNOSC-ViNYL/libpyvinyl/pull/19][PR #19]] merged 2021/10/01
+    :END:
+*** TODO [#A] Support for numpy arrays in Parameter class        :sprint2021:
+    DEADLINE: <2021-12-08 Wed> SCHEDULED: <2021-12-01 Wed>
     :PROPERTIES:
+    :EFFOR: 2d
+    :GH_ID:    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/76][76]]
+    :EFFORT:   2d
+    :ALLOCATE: shervin
+    :FLAGS:    sprint2021
+    :END:
+*** TODO McStasScript using libPyVinyl
+    DEADLINE: <2021-12-08 Wed> SCHEDULED: <2021-12-01 Wed>
+    :PROPERTIES:
+    :ALLOCATE: mads
+    :ORDERED:
+    :BLOCKER:
+    :EFFORT:   3d
+    :ID:       mcstas_libpyvinyl
+    :GH_ID:    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/33][33]]
+    :FLAGS:    sprint2021
+    :END:   
+    
+*** TODO SimEx-lite using libPyVinyl
+    DEADLINE: <2021-12-08 Wed> SCHEDULED: <2021-12-01 Wed>
+    :PROPERTIES:
+    :EFFORT:   3d
     :ALLOCATE: jun
-    :EFFORT:   10d
-    :ORDERED:  t
-    :BLOCKER:  previous-sibling
+    :ID:       simex_libpyvinyl
+    :GH_ID:    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/35][35]]
+    :FLAGS:    sprint2021
     :END: 
-    - [ ] Method to make the diff of current instrument and that saved in the repo
-    - [ ] ? Method to make the diff of the parameters
+*** TODO Shadow3 calculator and parameters 
+    DEADLINE: <2021-12-15 Wed> SCHEDULED: <2021-12-01 Wed>
+    :PROPERTIES:
+    :ALLOCATE_ALL: alijosa shervin mads carsten jun mousumi reviewers srio
+    :ALLOCATE: srio
+    :EFFORT:   3d
+    :GH_ID:    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/71][71]]
+    :FLAGS:    sprint2021
+    :END:
 *** TODO New release of libPyVinyl
+    DEADLINE: <2021-12-08 Wed>
     :PROPERTIES:
     :ALLOCATE: jun
     :ORDERED:  t
@@ -324,23 +459,18 @@
     :EFFORT:   2d
     :ID:       libpyvinyl_2
     :END: 
-*** TODO McStasScript using libPyVinyl
+    Simex, McStasscript and Shadow3 should comply to libpyvinyl:
+    [[https://github.com/PaNOSC-ViNYL/ViNYL-project/issues/70]]
+*** TODO Instrument database API (load, diff) [0/2]
     :PROPERTIES:
-    :ALLOCATE: mads
-    :ORDERED:
-    :BLOCKER:
-    :EFFORT:   20d
-    :DEPENDS:  libpyvinyl_2
-    :ID:       mcstas_libpyvinyl
+    :ALLOCATE: shervin,jun,mads
+    :EFFORT:   10d
+    :ORDERED:  t
+    :BLOCKER:  previous-sibling
+    :FLAGS:    sprint2021
     :END: 
-          
-*** TODO SimEx-lite using libPyVinyl
-    :PROPERTIES:
-    :EFFORT:   30d
-    :ALLOCATE: jun
-    :DEPENDS:  libpyvinyl_2
-    :ID:       simex_libpyvinyl
-    :END: 
+    - [ ] Method to make the diff of current instrument and that saved in the repo
+    - [ ] ? Method to make the diff of the parameters
 ** Instrument database
    :PROPERTIES:
    :ID:       instrument_db
@@ -429,3 +559,6 @@
 
 
     
+
+
+
