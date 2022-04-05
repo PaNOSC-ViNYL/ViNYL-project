@@ -1,0 +1,67 @@
+\documentclass[10pt]{scrartcl}
+\input{panosc_header}
+
+% sophisticated linking of references in the pdf and setting some options
+\usepackage{url}                                                  % for correct typesettings of URLs
+\usepackage{hyperref}                                             % for sophisticated linking of urls, dois, pictures, tables, etc.
+\hypersetup{
+    unicode=true,                                                 % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,                                              % show Acrobat’s toolbar?
+    pdfmenubar=true,                                              % show Acrobat’s menu?
+    pdffitwindow=false,                                           % window fit to page when opened
+    pdfstartview={FitH},                                          % fits the width of the page to the window
+    pdfauthor={C. Fortmann-Grote},                                           % author
+    pdftitle={D5.3: Repository of documented jupyter notebooks and Oasys canvase },   % title
+    pdfsubject={PaNOSC WP5 (ViNYL) Deliverable D5.3},                             % subject of the document
+    pdfcreator={pdflatex},                                         % creator of the document
+    pdfkeywords={PaNOSC, ViNYL, simulations, jupyter, simex, oasys, McStas,
+    service},                                         % list of keywords
+    pdfnewwindow=true,                                            % links in new PDF window
+    colorlinks=true,                                              % false: boxed links; true: colored links
+    linkcolor=blue,                                                % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,                                                % color of links to bibliography
+    filecolor=blue,                                               % color of file links
+    urlcolor=blue                                                 % color of external links
+}
+
+\begin{document}
+\makeatletter
+\begin{titlepage}
+\thispagestyle{scrheadings}
+\ohead{}
+\ihead{}
+\chead{}
+\ifoot{}
+\ofoot{}
+\noindent%
+\includegraphics[width=0.4\textwidth]{figures/PaNOSClogo_web_RGB_512x512.jpg}\\
+\Huge{%
+\renewcommand{\baselinestretch}{2.0}%
+  \textbf{%
+    Deliverable D5.3: Repository of documented jupyter notebooks and Oasys canvases\\
+  }%
+}%
+\\
+{%
+\Large{%
+  Mads Bertelsen,
+  Stella d'Ambrumenil,
+  Juncheng E,
+  Aljosa Hafner,
+  Gergely Norbert Nagy,
+  Shervin Nourbakhsh,
+  Mousumi Upadhyay Kahaly,
+  Carsten Fortmann-Grote
+  \bigskip\\
+  \bigskip\\
+  \textbf{\today}%
+}}%
+\end{titlepage}
+\makeatother
+
+%\tableofcontents
+\section{Introduction}
+
+
+\end{document}
+

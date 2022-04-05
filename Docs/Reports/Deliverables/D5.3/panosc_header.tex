@@ -1,0 +1,88 @@
+\usepackage[english]{babel}
+\usepackage{multirow}
+\usepackage[default]{opensans}
+\usepackage{sfmath} % sans font also for math
+\usepackage[binary-units = true]{siunitx}
+\usepackage{graphicx}
+% defining the paper layout that no text overlaps with the header
+\usepackage[
+  top=35mm,
+  headheight=25mm,
+  headsep=3mm,
+  bottom=30mm,
+  left=0.7in,
+  right=0.7in
+]{geometry}
+
+\usepackage[verbose]{placeins}
+\usepackage{subcaption}
+\usepackage{latexsym}
+\usepackage[centertags]{amsmath}
+\usepackage{amssymb}
+\usepackage[]{glossaries}
+
+\graphicspath{{figures/}}
+% custom header and footpage
+\usepackage{scrlayer-scrpage}
+\pagestyle{scrheadings} % you have to set the custom layout
+% Head
+\chead{}
+\ihead{\includegraphics[width=0.5in]{figures/PaNOSClogo_web_RGB_512x512.jpg}}
+\ohead{}%
+% Foot
+\ofoot{} % left foot
+\cfoot{%
+  \normalfont{%
+    \begin{tiny}%
+      \begin{centering}
+        This project has received funding from the
+        European Union’s Horizon 2020 research and innovation programme
+        under grant agreement No 823852.
+        \begin{minipage}[c]{0.3in}
+          \includegraphics[width=\textwidth]{figures/EU.png}
+        \end{minipage}
+      \end{centering}%
+    \end{tiny}%
+  }%
+}%
+%
+\usepackage{booktabs}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   BIBLIOGRAPHY SETTINGS
+\usepackage[bibstyle=nature,sorting=none,maxnames=1000,eprint=false,
+defernumbers=true, backend=biber]{biblatex}
+\usepackage{chemformula}
+\usepackage{hyperref}
+
+
+%\renewcommand*\finalnamedelim{, and\addspace}
+%\DeclareNameAlias{sortname}{last-first}
+%\renewcommand{\newunitpunct}{, }
+
+%\AtEveryBibitem{%
+  %\clearfield{day}%
+  %\clearfield{month}%
+  %\clearfield{endday}%
+  %\clearfield{endmonth}%
+  %\clearfield{issn}%
+  %\clearfield{issue}%
+%}
+%%convert titles to hyperlinks using doi
+%\ExecuteBibliographyOptions{doi=true} \newbibmacro{string+doi}[1]{%
+  %\iffieldundef{doi}{#1}{\href{http://dx.doi.org/\thefield{doi}}{#1}}}
+  %\DeclareFieldFormat*{title}{\usebibmacro{string+doi}{\mkbibemph{#1}}}
+
+%\addbibresource{urls.bib}
+%\addbibresource{footnotes.bib}
+%\addbibresource{library.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GLOSSARY SETTINGS
+%\setacronymstyle{long-short}
+%\input{glossary}
+%\makeglossaries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Zeilenabstand
+\renewcommand{\baselinestretch}{1.2}
