@@ -1,0 +1,32 @@
+Work has proceeded according to plan. Besides advancing the three simulation
+libraries Simex, McStasScript and Oasys, WP5 continued to work on the
+implementation of instrument parameters in libpyvinyl (Task 5.1) in combination
+with setting up an instrument database (Task 5.3) and deposition of documented
+example simulations in a simulations database (Task 5.2). Furthermore, we made
+preparatory steps towards deployment of our simulation services and we are
+currently finalizing the protocol for comparison of raw simulated to raw
+experimental data (Task 5.4).
+
+The instrument database is implemented as a collection of json files that define
+the physical properties of beamline and instrument components and their allowed
+ranges as well as numerical parameters relevant for the simulation codes. The
+python simulation API libpyvinyl has been modified to reflect this structure of
+parameters and their hierarchies. libpyvinyl now exposes methods to query
+parameters, their defaults and and permissible ranges from the database e.g.
+upon configuration of simulation workflows in McStasScript, Simex, and Oasys.
+
+Oasys workspaces can now be downloaded from a dedicated repository through a
+special Oasys widget and then opened in the user’s Oasys installation. Numerous
+x-ray beamlines are deposited in the repository, mainly for synchrotron RIs
+where the majority of Oasys users are based. In a similar way,
+beamline,instrument, and experiment simulation notebooks are collected under the
+umbrella of our github project at https://github.com/PaNOSC-ViNYL. As a first
+step towards service deployment, we have implemented recipes for the creation of
+docker containers that bundle the simulation code, the example notebooks and the
+jupyter lab. These containers can be run in a standalone mode or from within
+jupyter hub as a cloud service.
+
+More details can be found in our bi-weekly meeting notes which are publicly
+available at
+https://github.com/PaNOSC-ViNYL/ViNYL-project/wiki/Weekly-Meeting-Notes.
+

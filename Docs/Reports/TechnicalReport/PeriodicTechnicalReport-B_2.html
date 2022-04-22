@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>PeriodicTechnicalReport-B_2.html</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+</head>
+
+<body>
+
+<h1>Table of Contents</h1>
+
+<ol>
+<li><a href="#orgdea7bdc">1.2.5 Work package 5 - Virtual Neutron and X-ray Laboratory (VINYL)</a>
+<ol>
+<li><a href="#org8024195">Task T5.1 Simulation infrastructure</a></li>
+<li><a href="#orgb713565">Task T5.2 Photon and Neutron Source simulation data services</a></li>
+<li><a href="#orgcc50d5e">Task T5.3 Photon and Neutron beamline simulation data services</a></li>
+<li><a href="#orgb799e4a">Task 5.4 Simulation of signal generation including radiation-matter interaction</a></li>
+<li><a href="#org4108064">Future work</a></li>
+</ol></li>
+</ol>
+
+<p><a id="orgdea7bdc"></a></p>
+
+<h1>1.2.5 Work package 5 - Virtual Neutron and X-ray Laboratory (VINYL)</h1>
+
+<p>Activities in work package 5 ("Virtual Neutron and x-raY Laboratory - VINYL)
+were distributed across all Tasks except for T5.5. We report on each task below:</p>
+
+<p><a id="org8024195"></a></p>
+
+<h2>Task T5.1 Simulation infrastructure</h2>
+
+<p>The central aspect of Task 5.1 is the development of a harmonized simulation API
+and it's adoption in the three simulation frameworks (<em>SIMEX</em>, <em>Oasys</em> and
+<em>McStasScript</em>). Through coordinated efforts across all RIs, including a two
+week development sprint in September 2020, the python library <em>libpyvinyl</em>
+(<a href="https://github.com/PaNOSC-ViNYL/ViNYL-project/libpyvinyl">https://github.com/PaNOSC-ViNYL/ViNYL-project/libpyvinyl</a>) has matured to a
+point where first successfull adoptions in <em>McStasScript</em> have been demonstrated.
+Further adoption in <em>SIMEX</em> and <em>Oasys</em> was challenging due to a missing class
+representing simulation data in <em>libpyvinyl</em>. This class has hence been added to
+the library and adoption in <em>SIMEX</em> and <em>Oasys</em> (in particular the raytracing engine
+<em>Shadow3</em>) can now take place. The Parameters class in <em>libpyvinyl</em> builds on the
+instrument database (see Task 5.3) to query parameters and permissive values or
+ranges. All RIs contributed via to the
+specification, implementation, testing, review, and adoption of <em>libpyvinyl</em>. A
+second major activity in T5.1 was the dissemination of openPMD standard
+extensions in the community. After submission in fulfillment of Deliverable
+D5.1, the standard extensions were reviewed by the openPMD maintainers. In the
+meantime, two extensions (Molecular Dynamics and Wavefronts, both led by EuXFEL)
+have been merged into the mainline repository and will be part of the openPMD
+version 2 release. Another extension (Raytracing, led by CERIC-ERIC, ESS, and
+ILL) is currently under review after it had undergone substantial changes
+requiremed by the instrument database (see Task 5.3). Our raytracing extension
+will most likely remain a standalone standard because of conflicting design
+choices in the openPMD mainline extension for beam data (Beamphysics extension).</p>
+
+<p><a id="orgb713565"></a></p>
+
+<h2>Task T5.2 Photon and Neutron Source simulation data services</h2>
+
+<p>In Task 5.2, the code <em>COMSYL</em> for simulation of partially coherent x-ray sources
+and propagation has been made accessible as a web service (work led by ESRF).</p>
+
+<p>The x-ray pulses simulation database for coherent x-ray source simulations at
+Eu.XFEL and can now be accessed from the <em>SIMEX</em> photon experiment simulation
+library (work led by Eu.XFEL). <em>Oasys</em> workspaces describing ESRF beamlines are
+exposed to <em>Oasys</em> users through a dedicated github repository (see also Task
+5.3).</p>
+
+<p><a id="orgcc50d5e"></a></p>
+
+<h2>Task T5.3 Photon and Neutron beamline simulation data services</h2>
+
+<p>The idea of our
+beamline simulation services is to give users a starting point for simulations
+of photon or neutron beams propagating from the source to the experimental
+endstation in <em>Oasys</em>, <em>McStasScript</em>, or <em>SIMEX</em>.</p>
+
+<p>For <em>Oasys</em> (development led at ESRF and CERIC-ERIC), a github repository has
+been created at <a href="https://github.com/PaNOSC-ViNYL/Oasys-PaNOSC-Workspaces">https://github.com/PaNOSC-ViNYL/Oasys-PaNOSC-Workspaces</a> that
+contains a collection of <em>Oasys</em> workspaces (binary data files that define a
+workflow in <em>Oasys</em> including optical beamline elements, their order and
+orientation and beam parameters). These workspaces model various beamlines at
+the ESRF. More beamlines for ESRF and for other photon RIs will be added
+shortly, in preparation for the Deliverable 5.3. From within <em>Oasys</em>, the
+repository can be browsed similar to a local file directory and the user can
+select a workspace for download and open it in <em>Oasys</em>. The user can then
+adjust the beamline parameters to her needs.</p>
+
+<p>In a similar way, <em>McStasScript</em> provides preconfigured setups representing
+neutron beamlines at ESS. These can be imported into the simulation environment
+e.g. in a <em>jupyter notebook</em>.</p>
+
+<p>For <em>SIMEX</em>, the github
+repository <a href="https://github.com/PaNOSC-ViNYL/wavefrontDB">https://github.com/PaNOSC-ViNYL/wavefrontDB</a> fulfills this role of a
+beamline repository. Through the python library <em>WPG</em> (WavePropaGator), it is furthermore possible
+to load beamline definitions from the online beamline simulation tool <em>SiREPO</em>
+(<a href="https://www.sirepo.com/srw#">https://www.sirepo.com/srw#</a>).</p>
+
+<p>The beamline parameters themselves are maintained in a json file collection
+which is parsed by <em>libpyvinyl</em> to infer beamline parameters and permissive
+values and ranges.</p>
+
+<p><a id="orgb799e4a"></a></p>
+
+<h2>Task 5.4 Simulation of signal generation including radiation-matter interaction</h2>
+
+<p>As a first measure in Task 5.4, we have drafted a protocol for the comparison of
+raw simulated to raw experimental data. The final version will be released with
+Deliverable 5.4 together with a working example of a benchmark comparison.</p>
+
+<p>At EuXFEL, work is continuing to ease integration of radiation-matter interaction
+codes in SIMEX.</p>
+
+<p>Building on <em>McStasScript</em>, a prototype for integration of beamline and signal
+simulations in the data aquisition and control system at ILL has been developed.
+It allows the seemless switching between experimental data and simulated data on the control screen
+which is a useful feature for beamline tuning and signal estimation tasks.</p>
+
+<p>At ELI, several use cases have been developed that make use of the new
+capabilities to connect various simulation codes. E.g. use case 18 connects McStas
+Simulations of neutron beams with DFT target simulations to study the defect
+location dependent diffraction signals from Boro-carbon systems.</p>
+
+<p><a id="org4108064"></a></p>
+
+<h2>Future work</h2>
+
+<p>Beyond these tasks, initial work has been undertaken to prepare the deployment
+of our simulations as web services. To this end, docker containers have been
+created for <em>Oasys</em>, <em>McStas-McStasScript</em>, and <em>SIMEX</em> which can be launched e.g. in
+a jupyterhub environment. These containers are being used in the integration of
+simulations in the e-learning platform "pan-learning" developed in work
+package 8. The containers and the recipes how to build the containers now form the basis
+for work in Task 5.5.</p>
+
+<p>Our simulation API library <em>libpyvinyl</em> has been improved during another
+development sprint in Dec. 2021 (outside the reporting period) and will be
+released in Q1 2022 on the python package index (pypi). This will then enable
+the stable adoption of <em>libpyvinyl</em> in further simulation frameworks, stabilized
+build recipes for simulation docker containers and deployment of simulation web
+services. In parallel, the instrument database and simulation data repositories
+mentioned above will be enriched with more data to represent a larger variety of
+RI beamlines, instruments, and experimental conditions.</p>
+
+</body>
+</html>
