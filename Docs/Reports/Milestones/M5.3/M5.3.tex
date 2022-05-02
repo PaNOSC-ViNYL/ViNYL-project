@@ -61,19 +61,28 @@
 
 %\tableofcontents
 \section{Introduction}
-Motivation, general layout, relation to other projects
+%Motivation, general layout, relation to other projects
+When writing a simulation package, a significant effort is required to set up an appropriate structure and to streamline flow of information from the user to the individual parts of the simulation. Traditionally each simulation package will solve these tasks in a different manner, resulting in some unique user interface and structure. One important accomplishment of PaNOSC workpackage 5 is to provide a base package for new simulation packages that provides a suitable foundation with solutions to all these basic problems, yet enough flexibility to incorporate truly new functionality. This base package is called \textit{libpyvinyl}. Simulation packages built on \textit{libpyvinyl} will be able to skip basics tasks on parameters and software structure and go straight to implementing interesting scattering physics. Furthermore it will adhere to a standard scheme, making developers from other packages built on the same foundation more capable of helping each other. The most crucial benefit is however that users will find the interfaces of packages built on \textit{libpyvinyl} similar and thus what they learn using one package will be transferable to the others. These are the benefits of standardisation and harmonisation. The SimEx and McStasScript packages that simulates X-ray and Neutron instrumentation respectively are already using \textit{libpyvinyl}.
 
 \section{Libpyvinyl and its components}
 \label{sec:libpyvinyl}
+Since \textit{libpyvinyl} need to serve as a flexible foundation, it is important that the layout is general. The overall structure is breifly outlined here before the major components are each described in their separate sections. The basic unit in a simulation is referred to as a calculator as it performs some calculation. The developer can choose what that calculation depend on, and what this calculation results in, meaning there is flexibility both on input and output. The input to a calculator could be output from another, but also commonly parameters, for which there is a rich base class. A full simulation can be thought of as a sequence of calculators, and conceptually this is referred to as an instrument object, which also includes some additional capabilities.
 
 \subsection{Calculators}
 \label{sec:calculators}
+The calculator is a very general class that can take input and can provide output. All code that affect the physics of the simulation is contained within such calculators, it could for example be a calculator for a piece of optics or a sample. The input of a calculator can be data in the form of one or more data objects \ref{sec:data} and a input for a number of parameters \ref{sec:parameters}. The output is also organised as data objects. When a new calculator is developed, the dependence on the external data and parameters is specified.
+
+\subsection{Data}
+\label{sec:data}
+The \textit{libpyvinyl} package provides baseclasses for both individual data objects and collections of data objects. The data objects are very general and the code mainly facilitates the capabilities needed to transfer data from one calculator to another.
 
 \subsection{Parameters}
 \label{sec:parameters}
+The individual parameters are usually defined by a calculator class using the \textit{libpyvinyl} base parameter class. This class includes the ability to contain arrays, unit and limits on the allowed value. This rich parameter is a major part of the safety net that prevents a user in providing garbage input to a calculator that lie outside of its assumptions, for example a negative wavelength. 
 
 \subsection{Instruments}
 \label{sec:instruments}
+Instruments are conceptually a series of calculators but can also contain som master parameters. One could imagine a source calculator, some optics calculators, a sample calculator and then a detector calculator along with a parameter describing the simulated energy. As a master parameter, information about the simulated energy can be provided to multiple calculators that would need that information to avoid the user having to specify redundant information. The chain of calculators can then be executed from the instrument level, providing the requested data.
 
 \section{Installation}
 \label{sec:installation}
