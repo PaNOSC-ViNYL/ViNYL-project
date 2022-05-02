@@ -1,3 +1,4 @@
 *.bbl
 *.blg
 *.gz
+auto/
