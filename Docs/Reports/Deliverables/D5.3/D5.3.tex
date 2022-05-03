@@ -60,13 +60,36 @@
 \makeatother
 
 %\tableofcontents
-\section{Introduction}
-% Proposed introduction by Mads
-This document describes the activities of PaNOSC work package 5 (WP5) that fall under the D5.3 deliverable on documented simulation data services for beamline optics. WP5 has developed libpyvinyl as a basis interface used for simulation of X-ray and Neutron scattering, this library ensures a common interface for simulation that choose to build upon this foundation. That common interface have enabled us to create a consistent instrument database that can contain both X-ray and Neutron instruments. Instrument can be easily retrieved from an accompanying Python API, and expert users can update the instrument description directly though github that host the actual database. By hosting the instrument database on GitHub we both utilise the standard tool for the field and get the option of running quality checks on proposed updates of instruments using Continuous Integration.
+\section{Simulation infrastructure}
+Deliverable D5.3 in PaNOSC is the release of jupyter notebooks and Oasys
+workspaces
+that demonstrate the utilization of simulation services in appropriate cloud
+services, i.e. jupyter hub instances or cloud based Oasys installations,
+respectively. This document lists the published notebooks and workspaces and
+gives a brief outline of their scientific content as well as instructions how to
+launch them.
 
-In addition to the common instrument database each package have a dedicated github repository with Jupyter Notebooks that demonstrate both what can be achieved with the package and how to do so. The content of each are described in turn.
-\\
-TBD: Carsten, All
+This Deliverable is accompagnied by Milestone MS5.3, the release of the
+simulation API library \textit{libpyvinyl}. \textit{libpyvinyl}
+ensures a common interface for
+simulations that choose to build upon this foundation. In addition, we built
+a instrument database to represent beamline and instrument components in neutron
+or x--ray RIs, their parameters and permissible parameter values.
+Instruments can be easily retrieved from an
+accompanying Python API, and expert users can update the instrument description
+directly through github where we host the database. By hosting the instrument
+database on github we ensure it is accessible to a broad user base without
+specialized knowledge of database technology such as SQL and we avoid having to
+implement and maintain web frontends. Another benefit is the
+option to run quality checks on proposed updates of instruments using
+Continuous Integration.
+
+Our simulation services are backed by three distinct simulation frameworks:
+Simex for x--ray laser experiments, Oasys for x--ray optics, mainly focussing on
+synchrotron sources and McStasScript for neutron simulations. The underlying
+simulation codes are described in the respective framework's documentation. In
+the following, we document dedicated github repositories that host our jupyter
+notebooks and workspaces.
 
 \section{Oasys workspace repository}
 \label{sec:oasys}
@@ -82,7 +105,12 @@ McStasScript notebooks & \url{https://github.com/PaNOSC-ViNYL/McStasScript-noteb
 McStasScript documentation & \url{https://mads-bertelsen.github.io}
 \end{tabular}
 \end{center}
-The McStasScript notebook repository currently contains a full 11 notebook tutorial on McStas using the McStasScript Python interface developed under WP5. This tutorial is also available through the online McStasScript documentation. The repository also contains an example on using the widget interface for McStasScript, and an example on using a cryostat construction tool included in McStasScript.
+The McStasScript notebook repository currently contains a full 11 notebook
+tutorial on McStas using the McStasScript Python interface developed under WP5.
+This tutorial is also available through the online McStasScript documentation.
+The repository also contains an example on using the widget interface for
+McStasScript, and an example on using a cryostat construction tool included in
+McStasScript.
 
 \section{SimEx notebooks}
 \label{sec:simex}
