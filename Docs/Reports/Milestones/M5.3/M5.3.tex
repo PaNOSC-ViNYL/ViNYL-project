@@ -126,7 +126,7 @@ a sample. The input of a calculator can be data in the form of one or more data
 objects \ref{sec:data} and a input for a number of parameters
 \ref{sec:parameters}. The output is also organised as data objects. When a new
 calculator is developed, the dependence on the external data and parameters is
-specified. Figure~\ref{fig:libpyvinyl_classes_relations} gives a schematic
+specified. Figure~\ref{fig:libpyvinyl_classes_schema} gives a schematic
 representation of these base classes and some specialized classes. 
 
 
@@ -230,7 +230,33 @@ the runtime environment, i.e. no re-installation is required.
 
 \section{Instructions for developers}
 \label{sec:dev}
-A minimal usage example is pro
+Extensive usage instructions for developers of downstream simulation codes are
+provided in the online documentation. Here we only summarize the main points:
+\begin{description}
+\item[Identify needed components] Not all components provided by
+  \textit{libpyvinyl} may be needed to implement the targeted functionality.
+  E.g. a standalone simulation code does not necessarily have to implement the
+  \textit{Instrument} class functionalities.
+ 
+\item[Inherit base classes] In their simulation code, developers would then
+  define their own classes to represent data, code execution, parameters etc.
+  Fig.~\ref{fig:libpyvinyl_classes_schema} hints at which classes to inherit
+  from for the various components.
+
+ 
+\item[Implement specialized functionality] In many cases, only a very limited
+  number of methods need to be implemented and members declared. Consult the
+  source code of each parent class as well as the examples provided in the
+  documentation.
+
+ 
+\item[Test] We strongly recommend to add unit and regression tests for your
+  derived classes. Examples for how to setup a test class are provided in the
+  \texttt{tests/} directory of the source code repository. In particular,
+  \texttt{tests/integration/plusminus} contains tests for a derived
+  \textit{Calculator} which is also documented as an example in the documentation.
+  
+\end{description}
 
 
 
