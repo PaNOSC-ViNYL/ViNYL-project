@@ -61,39 +61,61 @@
 
 %\tableofcontents
 \section{Introduction}
-%Motivation, general layout, relation to other projects
-When writing a
-simulation package, a significant effort is required to set up an appropriate
-structure and to streamline flow of information from the user to the individual
-parts of the simulation. Traditionally each simulation package will solve these
-tasks in a different manner, resulting in some unique user interface and
-structure. One important accomplishment of PaNOSC workpackage 5 is to provide a
-base package for new simulation packages that provides a suitable foundation
-with solutions to all these basic problems, yet enough flexibility to
-incorporate truly new functionality. This base package is called
-\textit{libpyvinyl}. Simulation packages built on \textit{libpyvinyl} will be
+The design and
+implementation of a user interface (UI) requires special attention in any
+software product. A simulation software package must expose interfaces for
+the configuration of the simulation task, provision of input data, execution of
+the task including task and data distribution on parallel compute architectures,
+data retrieval and documentation. Traditionally, each simulation
+package implements its own specialized user interface making it hard for users
+to learn the usage of multiple different simulation tools.
+Furthermore, simulation pipelines that concatenate various simulation steps have to provide wrappers for each
+ simulation in the pipeline. Our python3 package \textit{libpyvinyl} addresses
+these issues by providing a base software layer that supports the aforementioned
+user interface functionalities in a generic way and ontop of which simulation
+codes and simulation frameworks\footnote{By `framework', we
+  understand a software product that supports configuration, execution and data
+  retrieval
+  for one or several simulation codes but that does not necessarily implement a
+  simulation algorithm itself, rather, it drives simulations based on the user's
+  input. An example would be the Oasys project, a framework for x-ray optics
+  simulations.} can build their specialized implementations. We strive to
+abstract away as much as possible the details of user interface functionalities
+while
+maintaining enough flexibility to support implementation of truly new functionality.
+
+Simulation packages built on \textit{libpyvinyl} will be
 able to skip basic tasks on parameters and software structure and go straight
-to implementing interesting scattering physics. Furthermore it will adhere to a
-standard scheme, making developers from other packages built on the same
-foundation more capable of helping each other. The most crucial benefit is
+to implementing interesting scattering physics. Furthermore such packages
+will adhere to a standard scheme, facilitating collaboration across
+different simulation codes that share \textit{libpyvinyl} as a foundation.
+The most crucial benefit is
 however that users will find the interfaces of packages built on
 \textit{libpyvinyl} similar and thus what they learn using one package will be
 transferable to the others. These are the benefits of standardisation and
-harmonisation. The SimEx and McStasScript packages that simulates X-ray and
-Neutron instrumentation respectively are already using \textit{libpyvinyl}.
+harmonisation. The SimEx and McStasScript packages that simulate X-ray and
+Neutron instruments, respectively have  already adopted \textit{libpyvinyl}.
+
+In the following, this report documents the components of \textit{libpyvinyl}, their
+relation to each other as well as the installation and utilization of the
+package.
 
 \section{Libpyvinyl and its components}
 \label{sec:libpyvinyl}
-Since \textit{libpyvinyl} need to serve as a flexible foundation, it is
-important that the layout is general. The overall structure is breifly outlined
-here before the major components are each described in their separate sections.
-The basic unit in a simulation is referred to as a calculator as it performs
-some calculation. The developer can choose what that calculation depend on, and
-what this calculation results in, meaning there is flexibility both on input and
-output. The input to a calculator could be output from another, but also
-commonly parameters, for which there is a rich base class. A full simulation can
-be thought of as a sequence of calculators, and conceptually this is referred to
-as an instrument object, which also includes some additional capabilities.
+Since \textit{libpyvinyl} needs to serve as a flexible foundation, it is
+important that the layout is general. The overall structure is briefly outlined
+here before the major components are described in their separate sections.
+
+The basic unit in a simulation is referred to as a \textit{Calculator} as it
+represents the execution of a simulation algorithm.
+Specification of the required input parameters and input data as well as the
+output data is the developer's responsibility. The \textit{Data} class
+represents input and output data while the \textit{Parameters} class represents
+simulation configuration parameters. These software entities already support a
+number of use cases including the concatenation of simulation steps where output
+data from one \textit{Calculator} becomes the input of the next
+\textit{Calculator}.
+Such a simulation pipeline is represented by the \textit{Instrument} class.
 
 \subsection{Calculators}
 \label{sec:calculators}
@@ -104,46 +126,111 @@ a sample. The input of a calculator can be data in the form of one or more data
 objects \ref{sec:data} and a input for a number of parameters
 \ref{sec:parameters}. The output is also organised as data objects. When a new
 calculator is developed, the dependence on the external data and parameters is
-specified.
+specified. Figure~\ref{fig:libpyvinyl_classes_relations} gives a schematic
+representation of these base classes and some specialized classes. 
+
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.8\textwidth]{figures/libpyvinyl_classes_relations.png}
+  \caption[\textit{libpyvinyl} schema]{Schematic representation of the
+    \textit{libpyvinyl} base classes, derived classes and their role in
+    describing complex simulation pipelines. Highlighted classes are implemented
+  by specialized simulation software developers. These inherit the generic
+  functionality and entity relations from \textit{libpyvinyl}'s base and derived classes.}
+  \label{fig:libpyvinyl_classes_schema}
+\end{figure}
 
 \subsection{Data}
 \label{sec:data}
-The \textit{libpyvinyl} package provides baseclasses for both individual data
-objects and collections of data objects. The data objects are very general and
-the code mainly facilitates the capabilities needed to transfer data from one
-calculator to another.
+The \textit{libpyvinyl} package provides baseclasses for both individual
+datasets, the \textit{Data} class (e.g. to represent a single simulated diffraction image)
+as well as  collections of datasets (a series of diffraction images from
+ sequential sample exposures). These objects  mainly facilitate the data transfer between \textit{Calculators}.
 
 \subsection{Parameters}
 \label{sec:parameters}
 The individual parameters are usually defined by a calculator class using the
 \textit{libpyvinyl} base parameter class. This class includes the ability to
-contain arrays, unit and limits on the allowed value. This rich parameter is a
-major part of the safety net that prevents a user in providing garbage input to
-a calculator that lie outside of its assumptions, for example a negative
-wavelength.
+contain arrays, units and permissible value ranges. The \textit{Parameters}
+class is a major part of the safety net that prevents a user from faulty
+configuration of the interfaced simulation code which would cause runtime
+errors or lead to wrong or misleading results.
 
 \subsection{Instruments}
 \label{sec:instruments}
-Instruments are conceptually a series of calculators but can also contain som
-master parameters. One could imagine a source calculator, some optics
-calculators, a sample calculator and then a detector calculator along with a
-parameter describing the simulated energy. As a master parameter, information
-about the simulated energy can be provided to multiple calculators that would
+Instruments are conceptually a series of \textit{Calculators} but can also contain 
+master parameters that configure the simulation globally.
+One could imagine a source \textit{Calculator}, some optics
+\textit{Calculators}, a sample \textit{Calculator} and then a detector \textit{Calculator} along with a
+\textit{Parameter} describing the simulated energy. As a \textit{MasterParameter}, information
+about the simulated energy can be provided to multiple \textit{Calculators} that would
 need that information to avoid the user having to specify redundant information.
-The chain of calculators can then be executed from the instrument level,
-providing the requested data.
+The chain of \textit{Calculators} can then be executed by calling the
+\textit{Instrument}'s member functions.
 
-\section{Installation}
+\section{Software availability and Installation}
 \label{sec:installation}
+The source code for \textit{libpyvinyl} is hosted on github.
+Tagged releases are registered 
+the python package index \textit{pypi} as documented in Sec.~\ref{sec:pypi}.
+
+Each commit to the code base triggers a build--test--deploy cycle. 
+Besides building the library components, also the documentation is compiled
+and published. Table~\ref{tab:links} provides the URLs to the aforementioned
+resources.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{l|l}
+ Software repository &   \url{https://github.com/PaNOSC-ViNYL/libpyvinyl} \\
+ Releases registry &   \url{https://github.com/PaNOSC-ViNYL/libpyvinyl/releases} \\
+ CI/CD status &   \url{https://github.com/PaNOSC-ViNYL/libpyvinyl/actions} \\
+ Documentation &    \url{https://libpyvinyl.readthedocs.io/}
+  \end{tabular}
+  \caption{Resource URLs for \textit{libpyvinyl}}
+  \label{tab:links}
+\end{table}
+ 
+
+\subsection{Dependencies and requirements}
+\label{sec:dep}
+
+\textit{libpyvinyl} is continuously tested on python versions 3.6 until 3.10.
+Required python packages are listed in the repository's \textit{requirements}
+files and will be installed automatically if the following instructions are applied.
+
+\subsection{Installation from the python package index pypi}
+\label{sec:pypi}
+
+Installation via \textit{pypi} is the most straightforward method. On a Unix based
+system, the shell command
+\begin{verbatim}
+$> pip install libpyvinyl
+\end{verbatim}
+will download, configure, and install the library into the users current python
+runtime environment.
+
+\subsection{Installation from source}
+\label{sec:source}
+
+Installing the library directly from the sources allows to install the latest,
+potentially unstable, release. This may be an option for developers seeking to
+contribute to \textit{libpyvinyl} or to test new features that are not available
+in the released versions yet.
+
+To get the sources from github and then install into the current runtime environment:
+\begin{verbatim}
+$> git clone https://github.com/PaNOSC-ViNYL/libpyvinyl
+$> pip install [-e] .
+\end{verbatim}
+Activating the option \texttt{-e} will link the installed code to the downloaded
+sources such that changes in the source code would immediately be reflected in
+the runtime environment, i.e. no re-installation is required.
 
 \section{Instructions for developers}
 \label{sec:dev}
-
-\section{Instructions for users}
-\label{sec:users}
-
-
-
+A minimal usage example is pro
 
 
 
