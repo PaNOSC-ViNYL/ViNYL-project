@@ -47,7 +47,7 @@
   Mads Bertelsen,
   Stella d'Ambrumenil,
   Juncheng E,
-  Aljosa Hafner,
+  Aljo\v{s}a Hafner,
   Gergely Norbert Nagy,
   Shervin Nourbakhsh,
   Mousumi Upadhyay Kahaly,
@@ -93,7 +93,59 @@ notebooks and workspaces.
 
 \section{Oasys workspace repository}
 \label{sec:oasys}
-TBD: Aljosa
+The main focus of OASYS is on providing a cohesive and easy-to-use graphical user interface (GUI) for a variety of X-ray optics simulation codes. It relies on the usage of Orange framework\footnote{\url{https://orangedatamining.com/}}, with its atomic element being called a widget. During the standard usage pattern, different widgets (optical elements) are connected to each other, thus creating a workflow (beamline). This is particularly useful for X-ray optics simulations, as the wavefront propagation direction is well-defined and known in advance (from the source to the experimental station).
+
+Since Orange is built with Qt, a suitable way of interacting with the environment in the cloud had to be found. Docker containers had been selected through a thorough evaluation. The recipes to make and run the containers have been provided for the deliverable. We provide two different Docker containers, one being suitable for local (workstation) installation and another one being suitable for cloud (server) installation. The latter comes in the form of a Jupyter hub plugin, essentially linking the OASYS package with the rest of the WP5 simulation codes and being able to be installed into any existing Jupyter hub instance.  A screenshot of OASYS running remotely in Jupyter hub is shown in Figure \ref{fig:oasysJupyter} and the code repositories (including documentation on how to build and run) of the two aforementioned Docker containers are available through the following links:
+
+\begin{center}
+\begin{tabular}{l l}
+OASYS local Docker container & \url{https://gitlab.elettra.eu/panosc/ceric/oasys-local-docker} \\
+OASYS Jupyter Docker container & \url{https://gitlab.elettra.eu/panosc/jupyter-desktop-oasys} \\
+Dockerhub release & \url{https://hub.docker.com/r/ceric/panosc-oasys-local}
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+    \centering
+    \setkeys{Gin}{width=\linewidth}
+    \begin{subfigure}{0.3\textwidth}
+        \includegraphics{figures/jupyter_select_desktop.png}
+        \caption{}
+        \label{fig:jupyter_select}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics{figures/jupyter_oasys_run.png}
+        \caption{}
+        \label{fig:oasys_run}
+    \end{subfigure}% trailing space between `subfigure` environments  had to be removed
+    \caption{(a) Running the XFCE desktop environment from within Jupyter hub. (b) A new browser tab opens with XFCE desktop, providing a way to run OASYS inside the web browser while sharing the computing resources with the Jupyter hub instance.}
+    \label{fig:oasysJupyter}
+\end{figure}
+
+OASYS projects are internally saved into the so-called \emph{OASYS Workspaces} (OWS). OWS files have an XML-like structure with the layout and some general properties being saved in easy-to-access ASCII format, while the actual content/parameters of individual widgets (optical elements) are in binary format (pickled Numpy objects). A beamline/instrument database therefore consists of a set of previously prepared and curated OWS files corresponding to an actual beamline. Each of the entries in the database contains some basic metadata and a pointer to the location of the respective OWS file. The user interacts with the database through a dedicated widget that is a part of the \emph{Shadow Panosc toolbox} extension.
+
+The database itself consists of the actual OWS files and an index file and is hosted on Github. Since OWS files contain binary parts it is desirable not to change their content. Therefore an index file in JSON format is provided, serving two purposes:
+\begin{itemize}
+    \item user needs no Github account for read access,
+    \item additional metadata can be provided.
+\end{itemize}
+
+The index file needs to be curated by the database admin and its changes can be easily tracked through the git commits. Furthermore, this way the widget offers the possibility of interacting with a database of arbitrary file formats and arbitrary locations, while still retaining the metadata. Figure \ref{fig:oasys_database} shows a screenshot of the widget. The links to the respective repositories are:
+
+\begin{center}
+\begin{tabular}{l l}
+OASYS workspaces database & \url{https://github.com/PaNOSC-ViNYL/Oasys-PaNOSC-Workspaces} \\
+OASYS Panosc toolbox code & \url{https://github.com/PaNOSC-ViNYL/OASYS1-PaNOSC}
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.52\textwidth]{figures/oasys_database_widget.png}
+    \caption{OASYS widget for interaction with the online instrument database.}
+    \label{fig:oasys_database}
+\end{figure}
 
 \section{McStasScript notebooks}
 \label{sec:mcstas}
@@ -116,8 +168,14 @@ McStasScript.
 \label{sec:simex}
 TBD: Jun, Carsten
 
-simex - shadow/oasys
+As a part of the \emph{Shadow Panosc toolbox} an OASYS widget is being developed which allows for interoperability of SimEx and OASYS. The simulated X-ray wavefront output can be seamlessly connected to a SimEx calculator. Through the use of online Jupyter hub plugin for OASYS, the output can also be used in SimEx Jupyter notebooks. The middleware interface is built on saving the OASYS files into an openPMD-compliant hdf file (Panosc deliverable D5.1, task 5.1) and then read by the corresponding SimEx code. Figure \ref{fig:simex_oasys_widget} shows the widget within OASYS window.
 
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/simexOasysWidget.png}
+    \caption{OASYS widget which enables interoperability of OASYS output and SimEx calculators through an intermediate layer of using openPMD-compliant hdf files (developed previously).}
+    \label{fig:simex_oasys_widget}
+\end{figure}
 
 \end{document}
 
