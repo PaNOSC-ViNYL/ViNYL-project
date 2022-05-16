@@ -67,7 +67,10 @@ that demonstrate the utilization of simulation services in appropriate cloud
 services, i.e. jupyter hub instances or cloud based Oasys installations,
 respectively. This document lists the published notebooks and workspaces and
 gives a brief outline of their scientific content as well as instructions how to
-launch them.
+launch them. All notebooks and workspaces can be accessed through a common entry
+point, the ViNYL-notebooks repository at
+\url{https://github.com/PaNOSC-ViNYL/ViNYL-notebooks}. Installation instructions
+are provided in the README file of that repository.
 
 This Deliverable is accompagnied by Milestone MS5.3, the release of the
 simulation API library \textit{libpyvinyl}. \textit{libpyvinyl}
@@ -90,6 +93,7 @@ synchrotron sources and McStasScript for neutron simulations. The underlying
 simulation codes are described in the respective framework's documentation. In
 the following, we document dedicated github repositories that host our jupyter
 notebooks and workspaces.
+
 
 \section{Oasys workspace repository}
 \label{sec:oasys}
@@ -168,7 +172,34 @@ McStasScript.
 
 \section{SimEx notebooks}
 \label{sec:simex}
-TBD: Jun, Carsten
+Numerous notebooks have been developed that showcase the use of the SIMEX
+library for simulation of photon experiments at x--ray laser facilities. The
+following table gives an overview and links directly to a static version of the
+notebooks on github. 
+To run these notebooks, a working SIMEX installation is needed.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{l|l}
+    \textbf{Notebook title} (link) & \textbf{Description} \\
+    \hline
+    \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/ESRF-SerialCrystallography/Jungfrau-ESRF.ipynb}{Jungfrau-ESRF.ipynb} & Crystallograhy at ESRF beamline ?? with 4M Jungfrau detector. \\
+    \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/SFX/crystFEL.ipynb}{crystFEL.ipynb} &  Nanocrystal diffraction at Eu.XFEL SFX instrument \cite{White2012} \\
+    \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/SPB/diffrChaperonins.ipynb}{diffrChaperonins.ipynby} & Singe particle imaging at Eu.XFEL SPB instrument\\
+    \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/s2e/start_to_end_demo.ipynb}{start\_to\_end\_demo.ipynb} & Start--to--end simulation for single particle imaging at Eu.XFEL SPB instrument. \\
+    \href{https://github.com/PaNOSC-ViNYL/wavefrontDB/blob/main/examples/EuXFEL_SASE1_SPB_KBfocus.ipynb}{EuXFEL\_SASE1\_SPB\_KBfocus.ipynb} & KB mirror focusing of SASE1 beam at Eu.XFEL \\
+    \href{https://github.com/PaNOSC-ViNYL/wavefrontDB/blob/main/examples/crl_focus.ipynb}{crl\_focus.ipynb} & CRL focusing of SASE1 beam at Eu.XFEL \\
+    \href{https://github.com/PaNOSC-ViNYL/wavefrontDB/blob/main/examples/edge.ipynb}{edge.ipynb} & Coherent x--ray diffraction from a solid edge \\
+    \href{https://github.com/PaNOSC-ViNYL/wavefrontDB/blob/main/examples/spheres.ipynb}{spheres.ipynb} & Coherent x--ray diffraction from solid spheres \\
+    \href{https://github.com/PaNOSC-ViNYL/wavefrontDB/blob/main/examples/wire.ipynb}{wire.ipynb} & Coherent x--ray diffraction from a thin wire \\
+    \hline
+  \end{tabular}
+  \caption{SIMEX example notebooks}
+  \label{tab:simex-notebooks}
+\end{table}
+
+\subsection{A SIMEX widget for Oasys}
+\label{sec:oasys-simex}
 
 As a part of the \emph{Shadow Panosc toolbox} an OASYS widget is being developed which allows for interoperability of SimEx and OASYS. The simulated X-ray wavefront output can be seamlessly connected to a SimEx calculator. Through the use of online Jupyter hub plugin for OASYS, the output can also be used in SimEx Jupyter notebooks. The middleware interface is built on saving the OASYS files into an openPMD-compliant hdf file (Panosc deliverable D5.1, task 5.1) and then read by the corresponding SimEx code. Figure \ref{fig:simex_oasys_widget} shows the widget within OASYS window.
 
