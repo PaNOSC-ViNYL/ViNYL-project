@@ -71,8 +71,7 @@ gives a brief outline of their scientific content as well as instructions how to
 launch them. All notebooks and workspaces can be accessed through a common entry
 point, the ViNYL-notebooks repository at
 \url{https://github.com/PaNOSC-ViNYL/ViNYL-notebooks}. Installation instructions
-are provided in the README file of that repository. The repository is registered
-on zenodo at \url{https://dx.doi.org/10.5281/zenodo.6562106/}.
+are provided in the README file of that repository.
 
 \section{Simulation infrastructure}
 \label{sec:simulation_infrastructure}
@@ -211,13 +210,14 @@ notebooks on github.
 To run these notebooks, a working SIMEX installation is needed.
 
 \begin{table}[ht]
+  \centering
   \caption{SIMEX notebooks}
   \begin{tabular}{l|l}
     \hline
     \textbf{Notebook title} (link) & \textbf{Description} \\
     \hline
     \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/ESRF-SerialCrystallography/Jungfrau-ESRF.ipynb}{Jungfrau-ESRF.ipynb} & Crystallograhy at ESRF beamline ?? with 4M Jungfrau detector. \\
-    \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/SFX/crystFEL.ipynb}{crystFEL.ipynb} &  Nanocrystal diffraction at Eu.XFEL SFX instrument \\
+    \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/SFX/crystFEL.ipynb}{crystFEL.ipynb} &  Nanocrystal diffraction at Eu.XFEL SFX instrument \cite{White2012} \\
     \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/SPB/diffrChaperonins.ipynb}{diffrChaperonins.ipynby} & Singe particle imaging at Eu.XFEL SPB instrument\\
     \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/s2e/start_to_end_demo.ipynb}{start\_to\_end\_demo.ipynb} & Start--to--end simulation for single particle imaging at Eu.XFEL SPB instrument. \\
     \href{https://github.com/PaNOSC-ViNYL/wavefrontDB/blob/main/examples/EuXFEL_SASE1_SPB_KBfocus.ipynb}{EuXFEL\_SASE1\_SPB\_KBfocus.ipynb} & KB mirror focusing of SASE1 beam at Eu.XFEL \\
@@ -230,7 +230,17 @@ To run these notebooks, a working SIMEX installation is needed.
   \label{tab:simex-notebooks}
 \end{table}
 
-\printbibliography
+\subsection{A SIMEX widget for Oasys}
+\label{sec:oasys-simex}
+
+As a part of the \emph{Shadow Panosc toolbox} an OASYS widget is being developed which allows for interoperability of SimEx and OASYS. The simulated X-ray wavefront output can be seamlessly connected to a SimEx calculator. Through the use of online Jupyter hub plugin for OASYS, the output can also be used in SimEx Jupyter notebooks. The middleware interface is built on saving the OASYS files into an openPMD-compliant hdf file (Panosc deliverable D5.1, task 5.1) and then read by the corresponding SimEx code. Figure \ref{fig:simex_oasys_widget} shows the widget within OASYS window.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/simexOasysWidget.png}
+    \caption{OASYS widget which enables interoperability of OASYS output and SimEx calculators through an intermediate layer of using openPMD-compliant hdf files (developed previously).}
+    \label{fig:simex_oasys_widget}
+\end{figure}
 
 \end{document}
 
