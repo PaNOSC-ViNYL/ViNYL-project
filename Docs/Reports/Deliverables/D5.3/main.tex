@@ -1,7 +1,48 @@
-\documentclass[10pt]{scrartcl}
-\input{panosc_header}
-
-% sophisticated linking of references in the pdf and setting some options
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage[none]{hyphenat}
+\usepackage{rotating}
+\usepackage{anyfontsize}
+% For subfigures
+\usepackage{caption}
+\usepackage{subcaption}
+% Get rid of the indent of the first line
+\edef\restoreparindent{\parindent=\the\parindent\relax}
+\usepackage{parskip}
+% Fix text out of margin
+\emergencystretch 3em
+% Set date format
+\usepackage[ddmmyyyy]{datetime}
+% Set fonts
+\usepackage{fontspec}
+\setmainfont{Muli}[
+    Path = fonts/ ,
+    Extension = .ttf ,
+    UprightFont = *-Regular ,
+    ItalicFont = *-Italic ,
+    BoldFont = *-Bold ,
+    BoldItalicFont = *-BoldItalic
+]
+\setsansfont{Muli-Black}[
+    Path = fonts/ ,
+    Extension = .ttf ,
+    ItalicFont = *Italic
+]
+% Set page margin
+\usepackage{geometry}
+\geometry{a4paper,
+            % total={175mm,257mm}, %space for content
+            headheight=80pt,
+            headsep=2pt,
+            % top=3cm,
+            bottom=2.5cm,
+            left=2cm,
+            right=1.75cm}
+% Set the name of the table of contents
 \usepackage{url}                                                  % for correct typesettings of URLs
 \usepackage{rotating}
 \usepackage{hyperref}                                             % for sophisticated linking of urls, dois, pictures, tables, etc.
@@ -12,60 +53,182 @@
     pdffitwindow=false,                                           % window fit to page when opened
     pdfstartview={FitH},                                          % fits the width of the page to the window
     pdfauthor={C. Fortmann-Grote},                                           % author
-    pdftitle={D5.3: Repository of documented jupyter notebooks and Oasys canvase },   % title
+    pdftitle={D5.3: Release of documented simulation APIs},   % title
     pdfsubject={PaNOSC WP5 (ViNYL) Deliverable D5.3},                             % subject of the document
     pdfcreator={pdflatex},                                         % creator of the document
-    pdfkeywords={PaNOSC, ViNYL, simulations, jupyter, simex, oasys, McStas,
-    service},                                         % list of keywords
     pdfnewwindow=true,                                            % links in new PDF window
     colorlinks=true,                                              % false: boxed links; true: colored links
-    linkcolor=blue,                                                % color of internal links (change box color with linkbordercolor)
+    linkcolor=black,                                                % color of internal links (change box color with linkbordercolor)
     citecolor=blue,                                                % color of links to bibliography
     filecolor=blue,                                               % color of file links
     urlcolor=blue                                                 % color of external links
 }
+% \usepackage[style=nature]{biblatex}
+% \addbibresource{references.bib}
+
+
+
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyfoot{} % clear all footer fields
+\renewcommand{\headrulewidth}{0pt} % clear the header ruler line
+\setlength{\footskip}{14pt}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[R]{\hspace{1em}}
+% \fancyfoot[c]{\begin{tabular}{c}
+% \includegraphics[width=\textwidth, valign=b]{footer.pdf}& \\
+% \end{tabular}}
+\fancyfoot[L]{\hspace{1cm} \includegraphics[width=0.95\textwidth]{footer.pdf}}
+% \cfoot{\includegraphics[width=0.95\textwidth]{footer.pdf}}
+
+% Set line spacing
+\emergencystretch 3em
+\setstretch{1.2}
+% \setlength{\footskip}{10pt}
 
 \begin{document}
-\makeatletter
-\begin{titlepage}
-\thispagestyle{scrheadings}
-\ohead{}
-\ihead{}
-\chead{}
-\ifoot{}
-\ofoot{}
-\noindent%
-\includegraphics[width=0.2\textwidth]{figures/PaNOSClogo_web_RGB_512x512.jpg}\\
-\Huge{%
-\renewcommand{\baselinestretch}{2.0}%
-  \textbf{%
-  PaNOSC\\
-Photon and Neutron Open Science Cloud\\
-H2020-INFRAEOSC-04-2018 \\
-Grant Agreement Number: 823852\\
-\includegraphics[width=0.8\textwidth]{figures/PaNOSClogo_web_RGB_512x512.jpg}\\
-    Deliverable D5.3: Repository of documented jupyter notebooks and Oasys canvases\\
-  }%
-}%
-\\
-{%
-\Large{%
-  Mads Bertelsen,
-  Stella d'Ambrumenil,
-  Juncheng E,
-  Aljo\v{s}a Hafner,
-  Gergely Norbert Nagy,
-  Shervin Nourbakhsh,
-  Mousumi Upadhyay Kahaly,
-  Carsten Fortmann-Grote
-  \bigskip\\
-  \bigskip\\
-  \textbf{\today}%
-}}%
-\end{titlepage}
-\makeatother
+% \thispagestyle{empty}
+\chead{\includegraphics[width=\textwidth]{header.pdf}}
 
-%\tableofcontents
+{
+	\centering
+    \begin{onehalfspace}
+    \sffamily
+     \vspace*{5ex}
+	{\fontsize{20}{24}\selectfont PaNOSC \par}
+	{\fontsize{20}{24}\selectfont Photon and Neutron Open Science Cloud \par}
+	{\fontsize{20}{24}\selectfont H2020-INFRAEOSC-04-2018 \par}
+	{\fontsize{20}{24}\selectfont Grant Agreement Number: 823852 \par}
+	\end{onehalfspace}
+
+	\vspace*{7ex}
+	\includegraphics[width=\textwidth]{PaNOSClogo_web_RGB.pdf}\par
+	\vfill
+	{\large \textbf{\sffamily D5.3: Repository of documented jupyter notebooks and Oasys canvases}}\par
+} % end of centering
+
+
+\includegraphics[width=1.27in]{by.eps}\par
+This work is licensed under a Creative Commons Attribution 4.0 International License\\
+(\url{http://creativecommons.org/licenses/by/4.0/})\par
+
+% \vspace*{0ex}
+\newpage
+
+% Set footer for the second page
+% \setlength{\footnotesep}{50pt}
+% \setlength{\footskip}{0pt}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[R]{\thepage}
+% \fancyfoot[c]{\begin{tabular}{c}
+% \includegraphics[width=\textwidth, valign=b]{footer.pdf}& \\
+% \end{tabular}}
+\fancyfoot[L]{\hspace{1cm} \includegraphics[width=0.95\textwidth]{footer.pdf}}
+
+
+{ %Front page
+\restoreparindent
+% \renewcommand{\arraystretch}{1.2} % change table row height
+
+{\sffamily\huge Project Deliverable Information Sheet \par}
+
+\begin{center}
+\begin{tabular}{ | m{5.2cm}| m{10.7cm} | }
+\hline
+Project Reference No. & 823852 \\
+\hline
+Project acronym: & PaNOSC \\
+\hline
+Project full name: & Photon and Neutron Open Science Cloud \\
+\hline
+H2020 Call: & INFRAEOSC-04-2018 \\
+\hline
+Project Coordinator: & Andy Götz (andy.gotz@esrf.fr) \\
+\hline
+Coordinating Organization: & ESRF \\
+\hline
+Project Website: & www.panosc.eu \\
+\hline
+Deliverable No: & D5.3: Repository of documented jupyter notebooks and Oasys canvases \\
+\hline
+Deliverable Type: & Software \\
+\hline
+Dissemination Level: & Public \\
+\hline
+Contractual Delivery Date: & 30/05/2022 \\
+\hline
+Actual Delivery Date: & \today \\
+\hline
+EC project Officer: & Ren\'e Martins \\
+\hline
+\end{tabular}
+\end{center}
+
+{\large \textbf{Document Control Sheet} \par}
+\begin{center}
+\begin{tabular}{ | m{5.2cm}| @{}c@{} | }
+\hline
+\textbf{Document}
+&
+\begin{tabular}{| m{10.7cm} |}
+Title: D5.3: Repository of documented jupyter notebooks and Oasys canvases \\\hline
+Version: 1 \\\hline
+Available at: \\\hline
+Files: 1 \\\hline
+\end{tabular}
+\tabularnewline\hline
+\textbf{Authorship}
+&
+\begin{tabular}{| m{10.7cm} |}
+Written by: Carsten Fortmann-Grote \\\hline
+Contributors:   Mads Bertelsen,
+Stella d'Ambrumenil,
+Juncheng E,
+Aljo\v{s}a Hafner,
+Gergely Norbert Nagy,
+Shervin Nourbakhsh,
+Mousumi Upadhyay Kahaly \\\hline
+Reviewed by: Jordi Bodera Sempere\\\hline
+Approved:  Andy Götz\\\hline
+\end{tabular}
+\tabularnewline\hline
+\end{tabular}
+\end{center}
+
+{\large \textbf{List of participants} \par}
+\begin{center}
+    \begin{tabular}{|m{3.0cm}|m{9.5cm}|m{3cm}|}
+        \hline
+        \textbf{Participant No.} & \textbf{Participant organisation name} & \textbf{Country} \\
+        \hline
+        1 & European Synchrotron Radiation Facility (ESRF) & France \\
+        \hline
+        2 & Institut Laue-Langevin (ILL) & France \\
+        \hline
+        3 & European XFEL (XFEL.EU) & Germany \\
+        \hline
+        4 & The European Spallation Source (ESS) & Sweden \\
+        \hline
+        5 & Extreme Light Infrastructure Delivery Consortium (ELI-DC) & Belgium \\
+        \hline
+        6 & Central European Research Infrastructure Consortium (CERIC-ERIC) & Italy \\
+        \hline
+        7 & EGI Foundation (EGI.eu) & The Netherlands \\
+        \hline
+    \end{tabular}
+\end{center}
+
+}%End front page
+
+% Table of contents
+\newpage
+\addtocontents{toc}{\protect\thispagestyle{fancy}}
+\newpage
+\tableofcontents
+\newpage
+% End Table of contents
+
+
 \section{Introduction}
 \label{sec:introduction}
 Deliverable D5.3 in PaNOSC is the release of jupyter notebooks and Oasys
@@ -116,7 +279,7 @@ Since Orange is built with Qt, a suitable way of interacting with the environmen
   \centering
   \begin{center}
     \caption{Oasys docker containers}
-    \begin{tabular}{ll}
+    \begin{tabular}{lp{10.6cm}}
       \hline
       OASYS local Docker container & \url{https://gitlab.elettra.eu/panosc/ceric/oasys-local-docker} \\
       OASYS Jupyter Docker container & \url{https://gitlab.elettra.eu/panosc/jupyter-desktop-oasys} \\
@@ -216,13 +379,14 @@ following table gives an overview and links directly to a static version of the
 notebooks on github. 
 To run these notebooks, a working SIMEX installation is needed.
 
-\begin{sidewaystable}
+% \begin{sidewaystable}[ht]
+\begin{table}[ht]
   \caption{SIMEX notebooks}
-  \begin{tabular}{l|l}
+  \begin{tabular}{l|p{9.8cm}}
     \hline
     \textbf{Notebook title} (link) & \textbf{Description} \\
     \hline
-    \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/ESRF-SerialCrystallography/Jungfrau-ESRF.ipynb}{Jungfrau-ESRF.ipynb} & Crystallograhy at ESRF beamline ?? with 4M Jungfrau detector. \\
+    \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/ESRF-SerialCrystallography/Jungfrau-ESRF.ipynb}{Jungfrau-ESRF.ipynb} & Crystallograhy at ESRF with 4M Jungfrau detector\\
     \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/SFX/crystFEL.ipynb}{crystFEL.ipynb} &  Nanocrystal diffraction at Eu.XFEL SFX instrument \\
     \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/SPB/diffrChaperonins.ipynb}{diffrChaperonins.ipynby} & Singe particle imaging at Eu.XFEL SPB instrument\\
     \href{https://github.com/PaNOSC-ViNYL/SimEx-notebooks/blob/main/s2e/start_to_end_demo.ipynb}{start\_to\_end\_demo.ipynb} & Start--to--end simulation for single particle imaging at Eu.XFEL SPB instrument. \\
@@ -234,9 +398,11 @@ To run these notebooks, a working SIMEX installation is needed.
     \hline
   \end{tabular}
   \label{tab:simex-notebooks}
-\end{sidewaystable}[ht]
+\end{table}
+% \end{sidewaystable}
 
-\printbibliography
+% \printbibliography
+
+% \fancypagestyle{plain}{}
 
 \end{document}
-
