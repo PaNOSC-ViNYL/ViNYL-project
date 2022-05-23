@@ -5,7 +5,6 @@
 *.fls
 *.log
 *.out
-*.pdf
 *.run.xml
 latexmkrc
 tags
