@@ -3,6 +3,7 @@
 
 % sophisticated linking of references in the pdf and setting some options
 \usepackage{url}                                                  % for correct typesettings of URLs
+\usepackage{rotating}
 \usepackage{hyperref}                                             % for sophisticated linking of urls, dois, pictures, tables, etc.
 \hypersetup{
     unicode=true,                                                 % non-Latin characters in Acrobat’s bookmarks
@@ -34,10 +35,15 @@
 \ifoot{}
 \ofoot{}
 \noindent%
-\includegraphics[width=0.4\textwidth]{figures/PaNOSClogo_web_RGB_512x512.jpg}\\
+\includegraphics[width=0.2\textwidth]{figures/PaNOSClogo_web_RGB_512x512.jpg}\\
 \Huge{%
 \renewcommand{\baselinestretch}{2.0}%
   \textbf{%
+  PaNOSC\\
+Photon and Neutron Open Science Cloud\\
+H2020-INFRAEOSC-04-2018 \\
+Grant Agreement Number: 823852\\
+\includegraphics[width=0.8\textwidth]{figures/PaNOSClogo_web_RGB_512x512.jpg}\\
     Deliverable D5.3: Repository of documented jupyter notebooks and Oasys canvases\\
   }%
 }%
@@ -210,7 +216,7 @@ following table gives an overview and links directly to a static version of the
 notebooks on github. 
 To run these notebooks, a working SIMEX installation is needed.
 
-\begin{table}[ht]
+\begin{sidewaystable}
   \caption{SIMEX notebooks}
   \begin{tabular}{l|l}
     \hline
@@ -228,7 +234,7 @@ To run these notebooks, a working SIMEX installation is needed.
     \hline
   \end{tabular}
   \label{tab:simex-notebooks}
-\end{table}
+\end{sidewaystable}[ht]
 
 \printbibliography
 
